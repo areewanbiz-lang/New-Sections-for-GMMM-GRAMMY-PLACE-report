@@ -1,0 +1,759 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>GMM Report Additions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#020617;--line:#334155;--txt:#e2e8f0;--mut:#94a3b8;--acc:#12a7cf;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:'Plus Jakarta Sans','Sarabun',system-ui,sans-serif;font-size:16.5px;line-height:1.75;-webkit-font-smoothing:antialiased}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(15,23,42,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:#0f172a}
+.top .in{max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top b{color:#fff;font-size:.95em}
+.top .sw{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.top .sw button{background:transparent;border:0;color:var(--mut);font:600 .85em inherit;font-family:inherit;padding:6px 14px;cursor:pointer}
+.top .sw button[aria-pressed="true"]{background:var(--acc);color:#fff}
+main{max-width:1080px;margin:0 auto;padding-block:20px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.banner{border:1px dashed #5a4614;background:rgba(242,200,106,.07);border-radius:14px;padding:12px 16px;color:#f6d58a;font-size:.88em;margin-bottom:10px}
+.edition h2{font-size:1.38em;color:#fff;font-weight:700;margin:1.8em 0 .6em;padding-bottom:.35em;border-bottom:1px solid var(--line)}
+.edition h3{font-size:1.12em;color:#f1f5f9;font-weight:700;margin:1.2em 0 .4em}
+.edition p{margin:0 0 .9em;color:#cbd5e1}
+.edition table{border-collapse:collapse;width:100%;font-size:.88em;text-align:left;display:block;overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:1em 0}
+.edition th,.edition td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top;color:#cbd5e1;min-width:110px}
+.edition th{background:#162036;color:#fff;font-weight:700}
+</style>
+
+<style id="gx-css">
+.gx{--gx-gold:#f2c86a;--gx-teal:#2dd4bf;--gx-blue:#6f93ff;--gx-violet:#b48cff;--gx-ruby:#ff6b86;--gx-acc:#12a7cf;--gx-card:#1e293b;--gx-panel:#0f172a;--gx-line:#334155;--gx-mut:#94a3b8;--gx-txt:#e2e8f0;
+  text-align:left;hyphens:manual;margin:18px 0 26px;font-size:.95em}
+.gx *{box-sizing:border-box}
+.gx .gx-lede{color:var(--gx-mut);margin:0 0 16px;max-width:70ch}
+.gx .gx-mono,.gx .gx-num{font-variant-numeric:tabular-nums}
+.gx .gx-k{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#6fd6ee}
+.gx-grid{display:grid;gap:14px}
+.gx-g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.gx-g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gx-g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gx-card{background:var(--gx-panel);border:1px solid var(--gx-line);border-radius:14px;padding:16px;min-width:0}
+.gx-card h4{margin:4px 0 6px;color:#fff;font-size:1.02em;line-height:1.35}
+.gx-card p{margin:0;color:#cbd5e1;font-size:.92em;line-height:1.6}
+.gx-card ul{margin:6px 0 0;padding-left:18px;color:#cbd5e1;font-size:.9em;line-height:1.6}
+.gx-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px}
+.gx-gate{margin-top:10px;border-top:1px solid var(--gx-line);padding-top:9px;font-size:.84em;color:#cbd5e1}
+.gx-gate b{color:var(--gx-gold)}
+.gx-btns{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.gx-btns button{background:var(--gx-card);color:var(--gx-txt);border:1px solid var(--gx-line);border-radius:10px;padding:7px 13px;font:inherit;font-size:.86em;font-weight:600;cursor:pointer}
+.gx-btns button[aria-pressed="true"]{background:var(--gx-acc);border-color:var(--gx-acc);color:#fff}
+.gx-btns button:focus-visible,.gx button:focus-visible{outline:2px solid var(--gx-gold);outline-offset:2px}
+/* engines 3D */
+.gx-eng{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:20px;align-items:center}
+.gx-stack{perspective:1000px;height:370px;position:relative;overflow:hidden}
+.gx-scene{position:absolute;inset:60px 0 0 0;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-38deg);transition:transform .6s}
+.gx-plate{position:absolute;left:50%;top:50%;width:200px;height:200px;margin:-100px 0 0 -100px;border-radius:20px;cursor:pointer;border:1px solid rgba(255,255,255,.3);transition:transform .45s,opacity .35s,box-shadow .35s}
+.gx-plate span{position:absolute;left:14px;right:14px;bottom:12px;font-weight:800;color:#0a0f1d;font-size:.92em;line-height:1.15}
+.gx-plate small{display:block;font-size:10.5px;letter-spacing:.08em;opacity:.8}
+.gx-p0{background:linear-gradient(135deg,#ffe3a3,#f2c86a 55%,#c99a2e)}
+.gx-p1{background:linear-gradient(135deg,#9ff3e6,#2dd4bf 55%,#109e8e);transform:translateZ(80px) scale(.86)}
+.gx-p2{background:linear-gradient(135deg,#e2d2ff,#b48cff 55%,#7c4fe0);transform:translateZ(160px) scale(.72)}
+.gx-plate.dim{opacity:.35}.gx-plate.on{box-shadow:0 0 0 3px #fff,0 26px 50px rgba(0,0,0,.6)}
+.gx-gantt{overflow-x:auto;border:1px solid var(--gx-line);border-radius:14px;background:var(--gx-panel);margin-top:16px}
+.gx-gantt-in{min-width:720px;padding:14px}
+.gx-gr{display:grid;grid-template-columns:150px repeat(24,minmax(0,1fr));align-items:center;min-height:38px;border-top:1px solid var(--gx-line)}
+.gx-gr.h{border-top:0;min-height:22px;font-size:11px;color:var(--gx-mut);text-align:center}
+.gx-gr .n{font-size:.85em;font-weight:700;color:#fff;text-align:left}
+.gx-bar{height:22px;border-radius:6px;font-size:11px;font-weight:700;color:#0a0f1d;padding:0 7px;display:flex;align-items:center;white-space:nowrap;overflow:hidden}
+/* concept matcher */
+.gx-match{overflow-x:auto;border:1px solid var(--gx-line);border-radius:14px}
+.gx-match table{display:table!important;border:0!important;margin:0!important;min-width:640px}
+.gx-fit{display:inline-block;min-width:92px;text-align:center;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px}
+.gx-fit.y{background:rgba(45,212,191,.16);color:#5eead4}.gx-fit.c{background:rgba(242,200,106,.15);color:#f6d58a}.gx-fit.n{background:rgba(255,107,134,.14);color:#ff9fb1}
+.gx-chips{display:flex;flex-wrap:wrap;gap:8px}
+.gx-chip{border:1px solid var(--gx-line);background:var(--gx-panel);border-radius:10px;padding:8px 10px;font-size:.84em;min-width:0}
+.gx-chip b{color:#fff;display:block;font-size:.98em}
+.gx-chip i{font-style:normal;color:var(--gx-mut);font-size:.9em}
+/* gates */
+.gx-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0}
+.gx-step{background:var(--gx-panel);border:1px solid var(--gx-line);border-right:0;padding:14px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.gx-step:last-child{border-right:1px solid var(--gx-line);border-radius:0 14px 14px 0}.gx-step:first-child{border-radius:14px 0 0 14px}
+.gx-step .s{font-size:11px;color:var(--gx-gold);font-weight:700;letter-spacing:.08em}
+.gx-step b{display:block;color:#fff;font-size:.92em;margin-top:3px}
+.gx-step.on{background:#132643;box-shadow:inset 0 -3px 0 var(--gx-acc)}
+.gx-stepinfo{margin-top:10px;background:var(--gx-card);border-radius:12px;padding:12px 14px;font-size:.9em;color:#cbd5e1}
+.gx-stepinfo b{color:#5eead4}
+.gx-bars{display:grid;gap:9px}
+.gx-br{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr) 120px;gap:10px;align-items:center;font-size:.86em}
+.gx-br .t{height:13px;background:#162036;border-radius:4px;overflow:hidden}
+.gx-br .f{height:100%;border-radius:4px}
+.gx-br .v{text-align:right;font-variant-numeric:tabular-nums;color:#fff}
+/* value */
+.gx-val{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:20px;border:1px solid #5a4614;border-radius:18px;background:linear-gradient(140deg,#171207,#0f172a 55%,#0a1a2a);padding:20px}
+.gx-ctl{display:grid;gap:13px}
+.gx-ctl label{display:grid;gap:5px;font-size:.84em;color:var(--gx-mut)}
+.gx-ctl .r{display:flex;justify-content:space-between;gap:8px}
+.gx-ctl output{color:#fff;font-weight:700;font-variant-numeric:tabular-nums}
+.gx-ctl input[type=range]{width:100%;accent-color:#f2c86a}
+.gx-big{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.gx-big>div{background:rgba(2,6,23,.6);border:1px solid var(--gx-line);border-radius:12px;padding:13px}
+.gx-big .v{font-size:1.7em;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+.gx-big .l{font-size:.78em;color:var(--gx-mut);margin-top:4px;line-height:1.4}
+.gx-verdict{margin-top:12px;padding:12px 14px;border-radius:12px;background:rgba(242,200,106,.1);border:1px solid #5a4614;font-weight:700;color:#fff;line-height:1.45}
+.gx-verdict small{display:block;font-weight:500;color:var(--gx-mut);margin-top:5px}
+.gx-formula{font-family:ui-monospace,Menlo,monospace;font-size:.78em;color:var(--gx-mut);background:#020617;border:1px solid var(--gx-line);border-radius:10px;padding:9px 11px;margin-top:10px;overflow-x:auto;white-space:nowrap}
+.gx-absorb{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+.gx-absorb button{background:var(--gx-panel);border:1px solid var(--gx-line);border-radius:12px;padding:12px;text-align:left;cursor:pointer;color:inherit;font:inherit}
+.gx-absorb button[aria-pressed="true"]{border-color:var(--gx-teal);background:#0b2a2c}
+.gx-absorb .p{font-size:1.25em;font-weight:800;color:var(--gx-teal)}
+.gx-absorb .m{font-size:.82em;color:#cbd5e1}
+/* swot */
+.gx-swot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.gx-q{border-radius:14px;padding:12px;border:1px solid var(--gx-line);background:var(--gx-panel)}
+.gx-q h4{margin:0 0 8px;font-size:.95em}
+.gx-it{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;font-size:.86em;color:#cbd5e1;transition:background .2s,opacity .2s}
+.gx-it .id{font-weight:800;font-size:.85em}
+.gx-it.hl{background:rgba(255,255,255,.1);color:#fff}
+.gx-it.fade{opacity:.35}
+.gx-pr{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.gx-pr.Critical{background:rgba(255,107,134,.2);color:#ff9fb1}.gx-pr.High{background:rgba(242,200,106,.16);color:#f6d58a}.gx-pr.Medium{background:rgba(111,147,255,.16);color:#a9bcff}
+.gx-tows{display:grid;gap:8px;margin-top:14px}
+.gx-tw{display:grid;grid-template-columns:52px 82px minmax(0,1fr);gap:10px;align-items:start;text-align:left;background:var(--gx-panel);border:1px solid var(--gx-line);border-radius:12px;padding:10px 12px;cursor:pointer;color:inherit;font:inherit}
+.gx-tw[aria-pressed="true"]{border-color:var(--gx-acc);background:#0d2236}
+.gx-tw .ty{font-weight:800;color:#6fd6ee}
+.gx-tw .ln{font-size:.82em;color:var(--gx-mut);font-variant-numeric:tabular-nums}
+.gx-tw .tx{font-size:.88em;color:#e2e8f0}
+.gx-tw .tx small{display:block;color:var(--gx-mut);margin-top:3px}
+.gx-pest{overflow-x:auto;border:1px solid var(--gx-line);border-radius:14px;margin-top:14px}
+.gx-pest-in{min-width:680px}
+.gx-pr-row{display:grid;grid-template-columns:44px minmax(0,1.1fr) 90px 80px 80px minmax(0,1.4fr);gap:10px;align-items:center;padding:9px 12px;border-top:1px solid var(--gx-line);font-size:.84em;color:#cbd5e1}
+.gx-pr-row.h{border-top:0;background:#162036;color:#fff;font-weight:700;font-size:.8em}
+.gx-letter{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-weight:800;color:#0a0f1d}
+.gx-dir{font-weight:700}
+/* 12 month */
+.gx-q4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--gx-line);border-radius:14px;overflow:hidden}
+.gx-q4>div{padding:14px;background:var(--gx-panel);border-left:1px solid var(--gx-line)}
+.gx-q4>div:first-child{border-left:0}
+.gx-q4 .m{font-size:11.5px;font-weight:800;letter-spacing:.06em}
+.gx-q4 h4{margin:4px 0 6px;color:#fff;font-size:.98em}
+.gx-q4 p{margin:0;font-size:.86em;color:#cbd5e1;line-height:1.55}
+.gx-pack{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.gx-pack span{border:1px solid var(--gx-line);border-radius:999px;padding:5px 11px;font-size:.82em;color:#cbd5e1;background:var(--gx-panel)}
+.gx-asks{display:grid;gap:8px}
+.gx-asks div{display:grid;grid-template-columns:38px minmax(0,1fr);gap:12px;align-items:center;padding:11px 14px;border:1px solid var(--gx-line);border-radius:12px;background:var(--gx-panel);font-size:.92em;color:#e2e8f0}
+.gx-asks i{font-style:normal;font-weight:800;color:#1a1300;background:#f2c86a;border-radius:8px;width:30px;height:30px;display:grid;place-items:center}
+.gx-note{font-size:.8em;color:var(--gx-mut);margin-top:10px;border-left:2px solid var(--gx-line);padding-left:10px}
+@media (max-width:860px){
+ .gx-g3,.gx-g4,.gx-eng,.gx-val{grid-template-columns:minmax(0,1fr)}
+ .gx-g2,.gx-swot{grid-template-columns:minmax(0,1fr)}
+ .gx-steps,.gx-q4{grid-template-columns:minmax(0,1fr)}
+ .gx-step,.gx-step:first-child,.gx-step:last-child{border:1px solid var(--gx-line);border-bottom:0;border-radius:0}
+ .gx-step:first-child{border-radius:14px 14px 0 0}.gx-step:last-child{border-bottom:1px solid var(--gx-line);border-radius:0 0 14px 14px}
+ .gx-q4>div{border-left:0;border-top:1px solid var(--gx-line)}.gx-q4>div:first-child{border-top:0}
+ .gx-absorb{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gx-br{grid-template-columns:minmax(0,1fr) 110px}.gx-br .t{grid-column:1/-1;grid-row:2}
+ .gx-stack{height:280px}.gx-plate{width:170px;height:170px;margin:-85px 0 0 -85px}
+}
+@media (max-width:480px){.gx-big{grid-template-columns:minmax(0,1fr)}.gx-it{grid-template-columns:30px minmax(0,1fr)}.gx-it .gx-pr{grid-column:2}}
+@media (prefers-reduced-motion:reduce){.gx *{transition:none!important}}
+@media print{.gx-gantt,.gx-match,.gx-pest{overflow:visible}.gx-stack{display:none}}
+</style>
+<div class="top"><div class="in"><b>New sections for gmm-grammy-place-report · Ver.5</b><span class="sw" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">English</button><button type="button" data-l="th" aria-pressed="false">ไทย</button></span></div></div><main><div class="banner">Preview of the new sections only. In the full page they sit between the existing sections; see the order in each heading's position.</div><article class="edition" id="pv-en" lang="en">
+<h2>Strategic Direction: Three Growth Engines</h2>
+<p>I propose three complementary growth engines with separate mandates, budgets and scorecards. The First Engine is the immediate operating job. The Second Engine and the New S-Curve are conditional: their cash flows never enter the building's base-case NOI before written approval.</p>
+<div class="gx" data-gx="engines" data-lang="en">
+ <div class="gx-eng">
+  <div class="gx-stack" aria-hidden="true"><div class="gx-scene">
+   <div class="gx-plate gx-p0" data-e="0"><span><small>FIRST · NOW</small>Core building</span></div>
+   <div class="gx-plate gx-p1" data-e="1"><span><small>SECOND · YEAR 2</small>Adjacent expansion</span></div>
+   <div class="gx-plate gx-p2" data-e="2"><span><small>EXPLORATORY</small>New S-Curve</span></div>
+  </div></div>
+  <div>
+   <div class="gx-btns" role="group" aria-label="Engine">
+    <button type="button" data-e="0" aria-pressed="true">First Engine</button>
+    <button type="button" data-e="1" aria-pressed="false">Second Engine</button>
+    <button type="button" data-e="2" aria-pressed="false">New S-Curve</button>
+   </div>
+   <div class="gx-card gx-engbody" aria-live="polite"></div>
+  </div>
+ </div>
+ <div class="gx-gantt"><div class="gx-gantt-in gx-ganttbody"></div></div>
+ <p class="gx-note">Year 1: stabilise GMM Grammy Place and run portfolio due diligence in parallel. Year 2: deploy only authorised programmes, without weakening the building's core KPIs.</p>
+</div>
+
+<h2>Tenant Mix, Direct Leasing &amp; Customer-Led Concepts</h2>
+<p>Destination tenants compete against a conventional fitted office on the same floor, not against each other. Every concept below is a candidate proposal, not an existing tenant or a live negotiation. Selection follows net effective rent, landlord capex, rent-free, occupancy-cost affordability, lease term and tenant credit.</p>
+<div class="gx" data-gx="concepts" data-lang="en">
+ <div class="gx-btns gx-cbtns" role="group" aria-label="Concept"></div>
+ <div class="gx-match"><table><thead><tr><th>Floor / unit</th><th>2025 listed area</th><th>Fit</th><th>Gross rent at planning rate</th><th>What must be true</th></tr></thead><tbody class="gx-mbody"></tbody></table></div>
+ <div class="gx-card gx-cinfo" style="margin-top:12px" aria-live="polite"></div>
+ <h3 style="margin-top:22px">B2 micro-units: one specialist operator per unit</h3>
+ <p class="gx-lede">B210 (33.15 sq.m.) and B202 (94.89 sq.m.) can host one compact, distinctive service each. These are alternatives for the same unit, not simultaneous occupants. Avoid duplicating the existing cafés, convenience retail and GMMTV merchandise on Floor 2.</p>
+ <div class="gx-chips gx-micro"></div>
+ <p class="gx-note">Beauty, massage and clinical-adjacent services need case-by-case public-health and licensing review before any concession.</p>
+</div>
+
+<h2>Directly Managed Alternatives &amp; Owner-Operated Options</h2>
+<p>Third-party leasing remains the principal approach. Only where a properly evidenced marketing programme fails to produce an attractive letting would Geurt Fah consider reversible direct operation, concessions or owner-funded fitted suites. Converting a vacant suite to an owner-run concept is never counted as leased occupancy.</p>
+<div class="gx" data-gx="direct" data-lang="en">
+ <div class="gx-steps gx-stepbtns"></div>
+ <div class="gx-stepinfo" aria-live="polite"></div>
+ <h3 style="margin-top:22px">Opportunity cost: the rent an owner-run concept must beat</h3>
+ <div class="gx-bars gx-oc"></div>
+ <div class="gx-grid gx-g3" style="margin-top:16px">
+  <div class="gx-card"><span class="gx-k">Floor 18 · up to 449.30 sq.m.</span><h4>Grammy-operated co-working</h4><p>Revenue hurdle ≈ THB 631,905/month: forgone rent THB 381,905 + THB 150,000 opex + THB 100,000 capex recovery (sensitivity only).</p></div>
+  <div class="gx-card"><span class="gx-k">Floor 13 · 1302 · 155.86 sq.m.</span><h4>Grammy Study + Work Lab</h4><p>24-hour pilot, then cut back to proven demand. Separate lift zone, ID checks, staffed nights. Only if Too Fast To Sleep or another study-café tenant does not proceed.</p></div>
+  <div class="gx-card"><span class="gx-k">B210 first · B202 alternative</span><h4>NGEEP 15/30-min power-nap</h4><p>Premium, private paid rest for early arrivals, lunch breaks, students waiting for pick-up and fan visitors. A simpler, lower-priced Paid Infirmary / Rest Room is a separate offer.</p></div>
+ </div>
+</div>
+
+<h2>Value Creation Plan: From Protected Income to Asset Value</h2>
+<p>Every baht of sustainable NOI becomes asset value. Value comes three ways: protect the income already in place, add quality new income, and spend capital only through approval gates. The model below lets management test the assumptions directly. Defaults are illustrative; management and valuers set the real capitalisation rate and margins.</p>
+<div class="gx" data-gx="value" data-lang="en">
+ <div class="gx-val">
+  <div class="gx-ctl">
+   <label><span class="r"><span>Capture of the THB 35.10m advertised asking-value pool</span><output data-o="let"></output></span><input type="range" data-i="let" min="0" max="100" step="5" value="50"></label>
+   <label><span class="r"><span>Incentive drag (headline → NER)</span><output data-o="disc"></output></span><input type="range" data-i="disc" min="0" max="35" step="1" value="16"></label>
+   <label><span class="r"><span>Anchor surrender avoided</span><output data-o="sur"></output></span><input type="range" data-i="sur" min="0" max="30" step="1" value="10"></label>
+   <label><span class="r"><span>Share of extra rent reaching NOI</span><output data-o="mar"></output></span><input type="range" data-i="mar" min="60" max="100" step="5" value="90"></label>
+   <label><span class="r"><span>Capitalisation rate</span><output data-o="cap"></output></span><input type="range" data-i="cap" min="5" max="9.5" step="0.25" value="7"></label>
+  </div>
+  <div>
+   <div class="gx-big">
+    <div><div class="v gx-vprot" style="color:#f2c86a">—</div><div class="l">Asset value protected through the anchor (THB)</div></div>
+    <div><div class="v gx-vgrow" style="color:#2dd4bf">—</div><div class="l">Asset value created by leasing up (THB)</div></div>
+   </div>
+   <div class="gx-bars gx-vbars" style="margin-top:12px"></div>
+   <div class="gx-verdict" aria-live="polite"></div>
+   <div class="gx-formula">Value = NOI ÷ cap rate · NOI = rent × (1 − incentive drag) × NOI share · EGI = GPR − V − C − I + other · NOI = EGI − OpEx</div>
+  </div>
+ </div>
+ <h3 style="margin-top:22px">Absorption sensitivity: gross billed rent, not NOI</h3>
+ <div class="gx-absorb"></div>
+ <p class="gx-note">The THB 35.10m pool is a raw cross-portal collation of 3,788.77 sq.m. It is not the rent roll, verified vacancy or NOI. One occupancy point on the 38,502.20 sq.m. legal planning basis equals 385.02 sq.m., about THB 4.0m a year at the disclosed group rate of THB 864.63.</p>
+ <h3 style="margin-top:22px">Six value levers</h3>
+ <div class="gx-grid gx-g3 gx-levers"></div>
+</div>
+
+
+<h2>Leasing Formula Toolkit</h2>
+<p>Four core formulas behind this report, working as calculators. Change any input to test a figure. Cells that need management-verified data start empty on purpose: the report does not assume an 82% start or a 90% target.</p>
+<div class="gx gx-tk" data-gx="toolkit" data-lang="en">
+ <p class="gx-k" style="margin:0 0 12px">Core Mathematical Formulas · Commercial Property Leasing 2026 · by AC</p>
+ <div class="gx-grid gx-g2">
+
+  <div class="gx-card gx-calc" data-c="bridge">
+   <span class="gx-k">01 · Net letting requirement (8X% → 9X%)</span>
+   <div class="gx-fx">Verified rate = Occupied NLA ÷ Certified NLA<br>Required area = max(0, Target − Verified) × Certified NLA</div>
+   <div class="gx-in">
+    <label>Certified total NLA (m²)<input type="number" inputmode="decimal" data-f="nla" value="38502.20" step="0.01"></label>
+    <label>Confirmed occupied NLA (m²)<input type="number" inputmode="decimal" data-f="occ" placeholder="from signed rent roll" step="0.01"></label>
+    <label>Approved target rate (%)<input type="number" inputmode="decimal" data-f="tgt" placeholder="management-approved" step="0.1" min="0" max="100"></label>
+    <label>Planning rent (THB/m²/month)<input type="number" inputmode="decimal" data-f="rent" value="850" step="1"></label>
+   </div>
+   <div class="gx-out" aria-live="polite"></div>
+  </div>
+
+  <div class="gx-card gx-calc" data-c="group">
+   <span class="gx-k">02 · Group occupancy without double counting</span>
+   <div class="gx-fx">Group NLA = Master group lease 17,137.33 m² + standalone subsidiary leases outside the master allocation</div>
+   <div class="gx-in">
+    <label>Master group lease (m²)<input type="number" inputmode="decimal" data-f="master" value="17137.33" step="0.01"></label>
+    <label class="gx-chk"><input type="checkbox" data-f="tv31"> <span>GMMTV Floor 31 · 943.65 m² is confirmed outside the master allocation</span></label>
+    <label class="gx-chk"><input type="checkbox" data-f="tv407"> <span>GMMTV 407.56 m² lease is confirmed outside the master allocation</span></label>
+    <label>Other verified standalone leases (m²)<input type="number" inputmode="decimal" data-f="other" value="0" step="0.01"></label>
+    <label>Area basis for share (m²)<input type="number" inputmode="decimal" data-f="basis" value="38502.20" step="0.01"></label>
+   </div>
+   <div class="gx-out" aria-live="polite"></div>
+  </div>
+
+  <div class="gx-card gx-calc" data-c="ner">
+   <span class="gx-k">03 · Net effective rent & total occupancy cost</span>
+   <div class="gx-fx">R<sub>eff</sub> = R × (T − M) ÷ T − (A<sub>fit-out</sub> + Commissions) ÷ T<br>C<sub>total</sub> = R<sub>eff</sub> + (Capex<sub>tenant</sub> + Reinstatement) ÷ T</div>
+   <div class="gx-in">
+    <label>Headline rent R (THB/m²/month)<input type="number" inputmode="decimal" data-f="r" value="800" step="1"></label>
+    <label>Lease term T (months)<input type="number" inputmode="numeric" data-f="t" value="36" step="1" min="1"></label>
+    <label>Rent-free M (months)<input type="number" inputmode="numeric" data-f="m" value="3" step="1" min="0"></label>
+    <label>Landlord fit-out A (THB/m²)<input type="number" inputmode="decimal" data-f="a" value="0" step="10"></label>
+    <label>Commissions (THB/m²)<input type="number" inputmode="decimal" data-f="c" value="800" step="10"></label>
+    <label>Tenant capex (THB/m²)<input type="number" inputmode="decimal" data-f="k" value="0" step="10"></label>
+    <label>Reinstatement (THB/m²)<input type="number" inputmode="decimal" data-f="e" value="0" step="10"></label>
+    <label>Area (m²)<input type="number" inputmode="decimal" data-f="area" value="250" step="1"></label>
+   </div>
+   <div class="gx-out" aria-live="polite"></div>
+  </div>
+
+  <div class="gx-card gx-calc" data-c="pool">
+   <span class="gx-k">04 · Implied mean asking rate</span>
+   <div class="gx-fx">Mean rate = Annual gross pool ÷ (Area × 12)</div>
+   <div class="gx-in">
+    <label>Annual gross asking pool (THB)<input type="number" inputmode="decimal" data-f="pool" value="35100000" step="1000"></label>
+    <label>Advertised area (m²)<input type="number" inputmode="decimal" data-f="parea" value="3788.77" step="0.01"></label>
+   </div>
+   <div class="gx-out" aria-live="polite"></div>
+  </div>
+
+ </div>
+ <p class="gx-note">All outputs are gross or rent-level arithmetic, not NOI or a forecast. The 3,788.77 m² pool is a raw cross-portal collation, not verified vacancy.</p>
+</div>
+<h2>Strategic Frameworks: SWOT, TOWS &amp; PESTEL</h2>
+<p>Priority is assigned by evidence strength, commercial impact and time sensitivity. Each TOWS response links specific SWOT factors to an approval gate, an accountable function and a KPI. Select a response to see which factors it uses.</p>
+<div class="gx" data-gx="frameworks" data-lang="en">
+ <div class="gx-swot"></div>
+ <h3 style="margin-top:20px">TOWS responses with approval gates</h3>
+ <div class="gx-tows" role="group"></div>
+ <h3 style="margin-top:20px">PESTEL: building-specific drivers</h3>
+ <div class="gx-pest"><div class="gx-pest-in"></div></div>
+</div>
+
+<h2>Operating Workflows, Asset Reporting &amp; the 12-Month Direction</h2>
+<p>After the first 100 days, the programme rolls forward quarter by quarter. Each month, management receives one asset pack on consistent definitions.</p>
+<div class="gx" data-gx="twelve" data-lang="en">
+ <div class="gx-q4">
+  <div><span class="m" style="color:#f2c86a">MONTHS 1–3</span><h4>Baseline &amp; quick wins</h4><p>Reconciled rent roll, one availability register, anchor lease-event calendar and approved quick wins.</p></div>
+  <div><span class="m" style="color:#2dd4bf">MONTHS 4–6</span><h4>Retention &amp; suite pilots</h4><p>Retention meetings and qualified fitted-suite pilots, with leasing conversion measured.</p></div>
+  <div><span class="m" style="color:#6f93ff">MONTHS 7–9</span><h4>Energy &amp; amenity works</h4><p>Progress approved energy and amenity works, measured against a metered baseline.</p></div>
+  <div><span class="m" style="color:#b48cff">MONTHS 10–12</span><h4>Forward plan</h4><p>Refresh the 12–24-month lease-event and CAPEX forecast; set next year's targets.</p></div>
+ </div>
+ <h3 style="margin-top:20px">Monthly asset pack</h3>
+ <div class="gx-pack gx-packbody"></div>
+</div>
+
+<h2>Recommended Management Decisions at Day 100</h2>
+<p>By Day 100, management should be able to make five decisions on verified evidence. Any scale-up then follows verified demand, legal entitlement, operating capacity, positive risk-adjusted economics and recorded approval.</p>
+<div class="gx" data-gx="decisions" data-lang="en"><div class="gx-asks">
+ <div><i>1</i><span>Confirm the certified performance baseline and the April 2027 anchor-renewal approach.</span></div>
+ <div><i>2</i><span>Approve an auditable unit-level availability register and a net-effective leasing policy.</span></div>
+ <div><i>3</i><span>Agree proportionate tenant-service and technical improvement priorities.</span></div>
+ <div><i>4</i><span>Select only underwritten, reversible in-building pilots.</span></div>
+ <div><i>5</i><span>Set separate mandates and investment gates for the Second Engine and the New S-Curve.</span></div>
+</div></div>
+</article><article class="edition" id="pv-th" lang="th" hidden>
+<h2>ทิศทางเชิงกลยุทธ์: สามเครื่องยนต์การเติบโต</h2>
+<p>ผู้สมัครเสนอสามเครื่องยนต์การเติบโตที่เสริมกัน โดยแยกอำนาจหน้าที่ งบประมาณ และตัวชี้วัดออกจากกัน เครื่องยนต์ที่ 1 คืองานบริหารที่ต้องทำทันที ส่วนเครื่องยนต์ที่ 2 และ New S-Curve เป็นข้อเสนอที่มีเงื่อนไข กระแสเงินสดของทั้งสองจะไม่ถูกนำมารวมใน NOI ฐานของอาคารก่อนได้รับอนุมัติเป็นลายลักษณ์อักษร</p>
+<div class="gx" data-gx="engines" data-lang="th">
+ <div class="gx-eng">
+  <div class="gx-stack" aria-hidden="true"><div class="gx-scene">
+   <div class="gx-plate gx-p0" data-e="0"><span><small>ที่ 1 · ทันที</small>ธุรกิจหลักอาคาร</span></div>
+   <div class="gx-plate gx-p1" data-e="1"><span><small>ที่ 2 · ปีที่ 2</small>ขยายธุรกิจ</span></div>
+   <div class="gx-plate gx-p2" data-e="2"><span><small>ทดลอง</small>New S-Curve</span></div>
+  </div></div>
+  <div>
+   <div class="gx-btns" role="group" aria-label="เครื่องยนต์">
+    <button type="button" data-e="0" aria-pressed="true">เครื่องยนต์ที่ 1</button>
+    <button type="button" data-e="1" aria-pressed="false">เครื่องยนต์ที่ 2</button>
+    <button type="button" data-e="2" aria-pressed="false">New S-Curve</button>
+   </div>
+   <div class="gx-card gx-engbody" aria-live="polite"></div>
+  </div>
+ </div>
+ <div class="gx-gantt"><div class="gx-gantt-in gx-ganttbody"></div></div>
+ <p class="gx-note">ปีที่ 1: ปรับเสถียรภาพ GMM Grammy Place และตรวจสอบพอร์ตทรัพย์สินคู่ขนาน ปีที่ 2: ดำเนินเฉพาะโครงการที่ได้รับอนุมัติ โดยไม่กระทบตัวชี้วัดหลักของอาคาร</p>
+</div>
+
+<h2>ส่วนผสมผู้เช่า การปล่อยเช่าโดยตรง และแนวคิดที่ขับเคลื่อนด้วยลูกค้า</h2>
+<p>ผู้เช่าที่เป็นจุดหมายปลายทางต้องแข่งกับสำนักงานตกแต่งพร้อมใช้บนชั้นเดียวกัน ไม่ใช่แข่งกันเอง แนวคิดทั้งหมดด้านล่างเป็นข้อเสนอของผู้สมัคร ไม่ใช่ผู้เช่าปัจจุบันหรือการเจรจาที่เกิดขึ้นจริง การคัดเลือกพิจารณาจากค่าเช่าสุทธิที่มีผลจริง (NER) เงินลงทุนของเจ้าของ ระยะเช่าฟรี ความสามารถในการจ่าย ระยะสัญญา และเครดิตผู้เช่า</p>
+<div class="gx" data-gx="concepts" data-lang="th">
+ <div class="gx-btns gx-cbtns" role="group" aria-label="แนวคิด"></div>
+ <div class="gx-match"><table><thead><tr><th>ชั้น / ยูนิต</th><th>พื้นที่ตามตารางปี 2025</th><th>ความเหมาะสม</th><th>ค่าเช่ารวมที่อัตราวางแผน</th><th>เงื่อนไขที่ต้องผ่าน</th></tr></thead><tbody class="gx-mbody"></tbody></table></div>
+ <div class="gx-card gx-cinfo" style="margin-top:12px" aria-live="polite"></div>
+ <h3 style="margin-top:22px">ยูนิตขนาดเล็กชั้น B2: ผู้ประกอบการเฉพาะทางหนึ่งรายต่อหนึ่งยูนิต</h3>
+ <p class="gx-lede">B210 (33.15 ตร.ม.) และ B202 (94.89 ตร.ม.) รองรับบริการขนาดเล็กที่โดดเด่นได้ยูนิตละหนึ่งราย เป็นทางเลือกสำหรับยูนิตเดียวกัน ไม่ใช่ผู้เช่าพร้อมกันหลายราย และต้องไม่ซ้ำกับคาเฟ่ ร้านสะดวกซื้อ และสินค้า GMMTV ที่ชั้น 2</p>
+ <div class="gx-chips gx-micro"></div>
+ <p class="gx-note">บริการความงาม นวด และบริการที่ใกล้เคียงทางการแพทย์ ต้องตรวจสอบด้านสาธารณสุขและใบอนุญาตเป็นรายกรณีก่อนให้สัมปทาน</p>
+</div>
+
+<h2>ทางเลือกที่เจ้าของบริหารเองและการดำเนินงานโดยเกิดฟ้า</h2>
+<p>การปล่อยเช่าให้บุคคลภายนอกยังเป็นแนวทางหลัก เกิดฟ้าจะพิจารณาการบริหารเองแบบย้อนกลับได้ การให้สัมปทาน หรือยูนิตตกแต่งที่เจ้าของลงทุน เฉพาะเมื่อการทำตลาดที่มีหลักฐานครบถ้วนไม่ได้ผู้เช่าที่เหมาะสม และการเปลี่ยนยูนิตว่างเป็นธุรกิจที่เจ้าของบริหารเองจะไม่ถูกนับเป็นอัตราการเช่า</p>
+<div class="gx" data-gx="direct" data-lang="th">
+ <div class="gx-steps gx-stepbtns"></div>
+ <div class="gx-stepinfo" aria-live="polite"></div>
+ <h3 style="margin-top:22px">ต้นทุนค่าเสียโอกาส: ค่าเช่าที่ธุรกิจของเจ้าของต้องทำได้ดีกว่า</h3>
+ <div class="gx-bars gx-oc"></div>
+ <div class="gx-grid gx-g3" style="margin-top:16px">
+  <div class="gx-card"><span class="gx-k">ชั้น 18 · สูงสุด 449.30 ตร.ม.</span><h4>Co-working ที่ Grammy บริหาร</h4><p>รายได้ขั้นต่ำ ≈ 631,905 บาท/เดือน: ค่าเช่าที่เสียไป 381,905 + ค่าดำเนินการ 150,000 + คืนทุน 100,000 บาท (เพื่อทดสอบความอ่อนไหวเท่านั้น)</p></div>
+  <div class="gx-card"><span class="gx-k">ชั้น 13 · 1302 · 155.86 ตร.ม.</span><h4>Grammy Study + Work Lab</h4><p>ทดลองเปิด 24 ชม. แล้วปรับตามความต้องการจริง แยกโซนลิฟต์ ตรวจบัตร มีเจ้าหน้าที่กะดึก ดำเนินการเมื่อ Too Fast To Sleep หรือผู้เช่าคาเฟ่ติวรายอื่นไม่ตกลงเช่า</p></div>
+  <div class="gx-card"><span class="gx-k">B210 ก่อน · B202 เป็นทางเลือก</span><h4>NGEEP งีบ 15/30 นาที</h4><p>บริการพักผ่อนส่วนตัวระดับพรีเมียมแบบเสียเงิน สำหรับคนมาก่อนเวลา พักกลางวัน นักเรียนรอผู้ปกครอง และแฟนคลับ ส่วนห้องพักพยาบาลราคาต่ำกว่าเป็นบริการแยก</p></div>
+ </div>
+</div>
+
+<h2>แผนการสร้างมูลค่า: จากรายได้ที่ปกป้องได้สู่มูลค่าสินทรัพย์</h2>
+<p>ทุกบาทของ NOI ที่ยั่งยืนกลายเป็นมูลค่าสินทรัพย์ มูลค่าเกิดได้สามทาง: ปกป้องรายได้ที่มีอยู่ เพิ่มรายได้ใหม่ที่มีคุณภาพ และใช้เงินลงทุนผ่านขั้นตอนอนุมัติเท่านั้น แบบจำลองด้านล่างให้ผู้บริหารทดสอบสมมติฐานได้เอง ค่าเริ่มต้นเป็นตัวอย่าง อัตราผลตอบแทน (cap rate) และสัดส่วนกำไรจริงกำหนดโดยฝ่ายบริหารและผู้ประเมินราคา</p>
+<div class="gx" data-gx="value" data-lang="th">
+ <div class="gx-val">
+  <div class="gx-ctl">
+   <label><span class="r"><span>สัดส่วนที่ปล่อยเช่าได้จากมูลค่าราคาเสนอ 35.10 ล้านบาท</span><output data-o="let"></output></span><input type="range" data-i="let" min="0" max="100" step="5" value="50"></label>
+   <label><span class="r"><span>ส่วนลดจากสิ่งจูงใจ (ราคาประกาศ → NER)</span><output data-o="disc"></output></span><input type="range" data-i="disc" min="0" max="35" step="1" value="16"></label>
+   <label><span class="r"><span>การคืนพื้นที่ของผู้เช่าหลักที่ป้องกันได้</span><output data-o="sur"></output></span><input type="range" data-i="sur" min="0" max="30" step="1" value="10"></label>
+   <label><span class="r"><span>สัดส่วนรายได้ส่วนเพิ่มที่เป็น NOI</span><output data-o="mar"></output></span><input type="range" data-i="mar" min="60" max="100" step="5" value="90"></label>
+   <label><span class="r"><span>อัตราผลตอบแทน (Cap rate)</span><output data-o="cap"></output></span><input type="range" data-i="cap" min="5" max="9.5" step="0.25" value="7"></label>
+  </div>
+  <div>
+   <div class="gx-big">
+    <div><div class="v gx-vprot" style="color:#f2c86a">—</div><div class="l">มูลค่าสินทรัพย์ที่ปกป้องได้จากผู้เช่าหลัก (บาท)</div></div>
+    <div><div class="v gx-vgrow" style="color:#2dd4bf">—</div><div class="l">มูลค่าสินทรัพย์ที่สร้างจากการปล่อยเช่า (บาท)</div></div>
+   </div>
+   <div class="gx-bars gx-vbars" style="margin-top:12px"></div>
+   <div class="gx-verdict" aria-live="polite"></div>
+   <div class="gx-formula">Value = NOI ÷ cap rate · NOI = rent × (1 − incentive drag) × NOI share · EGI = GPR − V − C − I + other · NOI = EGI − OpEx</div>
+  </div>
+ </div>
+ <h3 style="margin-top:22px">ความอ่อนไหวของการดูดซับพื้นที่: ค่าเช่ารวม ไม่ใช่ NOI</h3>
+ <div class="gx-absorb"></div>
+ <p class="gx-note">มูลค่า 35.10 ล้านบาทมาจากการรวมประกาศหลายเว็บไซต์ 3,788.77 ตร.ม. ไม่ใช่ rent roll พื้นที่ว่างที่ตรวจสอบแล้ว หรือ NOI ทุก 1 จุดของอัตราการเช่าบนฐาน 38,502.20 ตร.ม. เท่ากับ 385.02 ตร.ม. หรือราว 4.0 ล้านบาทต่อปีที่อัตรากลุ่ม 864.63 บาท</p>
+ <h3 style="margin-top:22px">หกคันโยกการสร้างมูลค่า</h3>
+ <div class="gx-grid gx-g3 gx-levers"></div>
+</div>
+
+
+<h2>ชุดเครื่องมือสูตรการปล่อยเช่า</h2>
+<p>สูตรหลักสี่สูตรที่ใช้ในรายงานนี้ ทำงานเป็นเครื่องคำนวณ เปลี่ยนค่าใดก็ได้เพื่อทดสอบตัวเลข ช่องที่ต้องใช้ข้อมูลที่ฝ่ายบริหารยืนยันจะเว้นว่างไว้โดยตั้งใจ เพราะรายงานไม่สมมติอัตราเริ่มต้น 82% หรือเป้าหมาย 90%</p>
+<div class="gx gx-tk" data-gx="toolkit" data-lang="th">
+ <p class="gx-k" style="margin:0 0 12px">สูตรคณิตศาสตร์หลัก · การปล่อยเช่าอสังหาริมทรัพย์เชิงพาณิชย์ 2026 · โดย AC</p>
+ <div class="gx-grid gx-g2">
+
+  <div class="gx-card gx-calc" data-c="bridge">
+   <span class="gx-k">01 · พื้นที่ที่ต้องปล่อยเช่าเพิ่ม (8X% → 9X%)</span>
+   <div class="gx-fx">Verified rate = Occupied NLA ÷ Certified NLA<br>Required area = max(0, Target − Verified) × Certified NLA</div>
+   <div class="gx-in">
+    <label>NLA รวมที่รับรอง (ตร.ม.)<input type="number" inputmode="decimal" data-f="nla" value="38502.20" step="0.01"></label>
+    <label>NLA ที่มีผู้เช่ายืนยันแล้ว (ตร.ม.)<input type="number" inputmode="decimal" data-f="occ" placeholder="จาก rent roll ที่ลงนาม" step="0.01"></label>
+    <label>อัตราเป้าหมายที่อนุมัติ (%)<input type="number" inputmode="decimal" data-f="tgt" placeholder="ฝ่ายบริหารอนุมัติ" step="0.1" min="0" max="100"></label>
+    <label>ค่าเช่าวางแผน (บาท/ตร.ม./เดือน)<input type="number" inputmode="decimal" data-f="rent" value="850" step="1"></label>
+   </div>
+   <div class="gx-out" aria-live="polite"></div>
+  </div>
+
+  <div class="gx-card gx-calc" data-c="group">
+   <span class="gx-k">02 · อัตราการเช่ากลุ่มโดยไม่นับซ้ำ</span>
+   <div class="gx-fx">Group NLA = Master group lease 17,137.33 m² + standalone subsidiary leases outside the master allocation</div>
+   <div class="gx-in">
+    <label>สัญญากลุ่มหลัก (ตร.ม.)<input type="number" inputmode="decimal" data-f="master" value="17137.33" step="0.01"></label>
+    <label class="gx-chk"><input type="checkbox" data-f="tv31"> <span>GMMTV ชั้น 31 · 943.65 ตร.ม. ยืนยันแล้วว่าอยู่นอกสัญญากลุ่มหลัก</span></label>
+    <label class="gx-chk"><input type="checkbox" data-f="tv407"> <span>สัญญา GMMTV 407.56 ตร.ม. ยืนยันแล้วว่าอยู่นอกสัญญากลุ่มหลัก</span></label>
+    <label>สัญญาแยกอื่นที่ยืนยันแล้ว (ตร.ม.)<input type="number" inputmode="decimal" data-f="other" value="0" step="0.01"></label>
+    <label>ฐานพื้นที่สำหรับคำนวณสัดส่วน (ตร.ม.)<input type="number" inputmode="decimal" data-f="basis" value="38502.20" step="0.01"></label>
+   </div>
+   <div class="gx-out" aria-live="polite"></div>
+  </div>
+
+  <div class="gx-card gx-calc" data-c="ner">
+   <span class="gx-k">03 · ค่าเช่าสุทธิและต้นทุนการเช่ารวม</span>
+   <div class="gx-fx">R<sub>eff</sub> = R × (T − M) ÷ T − (A<sub>fit-out</sub> + Commissions) ÷ T<br>C<sub>total</sub> = R<sub>eff</sub> + (Capex<sub>tenant</sub> + Reinstatement) ÷ T</div>
+   <div class="gx-in">
+    <label>ค่าเช่าประกาศ R (บาท/ตร.ม./เดือน)<input type="number" inputmode="decimal" data-f="r" value="800" step="1"></label>
+    <label>ระยะสัญญา T (เดือน)<input type="number" inputmode="numeric" data-f="t" value="36" step="1" min="1"></label>
+    <label>เช่าฟรี M (เดือน)<input type="number" inputmode="numeric" data-f="m" value="3" step="1" min="0"></label>
+    <label>เงินตกแต่งจากเจ้าของ A (บาท/ตร.ม.)<input type="number" inputmode="decimal" data-f="a" value="0" step="10"></label>
+    <label>ค่านายหน้า (บาท/ตร.ม.)<input type="number" inputmode="decimal" data-f="c" value="800" step="10"></label>
+    <label>เงินลงทุนของผู้เช่า (บาท/ตร.ม.)<input type="number" inputmode="decimal" data-f="k" value="0" step="10"></label>
+    <label>ค่าคืนสภาพ (บาท/ตร.ม.)<input type="number" inputmode="decimal" data-f="e" value="0" step="10"></label>
+    <label>พื้นที่ (ตร.ม.)<input type="number" inputmode="decimal" data-f="area" value="250" step="1"></label>
+   </div>
+   <div class="gx-out" aria-live="polite"></div>
+  </div>
+
+  <div class="gx-card gx-calc" data-c="pool">
+   <span class="gx-k">04 · ค่าเช่าเสนอเฉลี่ยโดยนัย</span>
+   <div class="gx-fx">Mean rate = Annual gross pool ÷ (Area × 12)</div>
+   <div class="gx-in">
+    <label>มูลค่าราคาเสนอรวมต่อปี (บาท)<input type="number" inputmode="decimal" data-f="pool" value="35100000" step="1000"></label>
+    <label>พื้นที่ที่ประกาศ (ตร.ม.)<input type="number" inputmode="decimal" data-f="parea" value="3788.77" step="0.01"></label>
+   </div>
+   <div class="gx-out" aria-live="polite"></div>
+  </div>
+
+ </div>
+ <p class="gx-note">ผลลัพธ์ทั้งหมดเป็นการคำนวณระดับค่าเช่ารวม ไม่ใช่ NOI หรือการพยากรณ์ พื้นที่ 3,788.77 ตร.ม. เป็นการรวมประกาศจากหลายเว็บไซต์ ไม่ใช่พื้นที่ว่างที่ตรวจสอบแล้ว</p>
+</div>
+<h2>กรอบกลยุทธ์: SWOT, TOWS และ PESTEL</h2>
+<p>การจัดลำดับความสำคัญพิจารณาจากความแข็งแรงของหลักฐาน ผลกระทบเชิงพาณิชย์ และความเร่งด่วน กลยุทธ์ TOWS แต่ละข้อเชื่อมปัจจัย SWOT เข้ากับเงื่อนไขอนุมัติ ฝ่ายที่รับผิดชอบ และตัวชี้วัด เลือกกลยุทธ์เพื่อดูว่าใช้ปัจจัยใด</p>
+<div class="gx" data-gx="frameworks" data-lang="th">
+ <div class="gx-swot"></div>
+ <h3 style="margin-top:20px">กลยุทธ์ TOWS พร้อมเงื่อนไขอนุมัติ</h3>
+ <div class="gx-tows" role="group"></div>
+ <h3 style="margin-top:20px">PESTEL: ปัจจัยที่กระทบอาคารโดยตรง</h3>
+ <div class="gx-pest"><div class="gx-pest-in"></div></div>
+</div>
+
+<h2>ระบบงาน การรายงานสินทรัพย์ และทิศทาง 12 เดือน</h2>
+<p>หลังจาก 100 วันแรก แผนงานจะเดินหน้าเป็นรายไตรมาส และทุกเดือนฝ่ายบริหารจะได้รับรายงานสินทรัพย์หนึ่งชุดที่ใช้นิยามเดียวกันตลอด</p>
+<div class="gx" data-gx="twelve" data-lang="th">
+ <div class="gx-q4">
+  <div><span class="m" style="color:#f2c86a">เดือนที่ 1–3</span><h4>ฐานข้อมูลและงานเร่งด่วน</h4><p>rent roll ที่กระทบยอดแล้ว ทะเบียนพื้นที่ว่างชุดเดียว ปฏิทินสัญญาผู้เช่าหลัก และงานเร่งด่วนที่อนุมัติ</p></div>
+  <div><span class="m" style="color:#2dd4bf">เดือนที่ 4–6</span><h4>รักษาผู้เช่าและนำร่องยูนิต</h4><p>ประชุมรักษาผู้เช่าและนำร่องยูนิตตกแต่งพร้อมใช้ที่ผ่านคัดกรอง พร้อมวัดอัตราการปิดดีล</p></div>
+  <div><span class="m" style="color:#6f93ff">เดือนที่ 7–9</span><h4>งานพลังงานและสิ่งอำนวยความสะดวก</h4><p>ดำเนินงานพลังงานและสิ่งอำนวยความสะดวกที่อนุมัติ โดยวัดเทียบกับฐานมิเตอร์</p></div>
+  <div><span class="m" style="color:#b48cff">เดือนที่ 10–12</span><h4>แผนล่วงหน้า</h4><p>ทบทวนประมาณการเหตุการณ์สัญญาและงบลงทุน 12–24 เดือน และกำหนดเป้าหมายปีถัดไป</p></div>
+ </div>
+ <h3 style="margin-top:20px">รายงานสินทรัพย์รายเดือน</h3>
+ <div class="gx-pack gx-packbody"></div>
+</div>
+
+<h2>การตัดสินใจที่เสนอต่อฝ่ายบริหารในวันที่ 100</h2>
+<p>ภายในวันที่ 100 ฝ่ายบริหารควรตัดสินใจได้ห้าเรื่องบนหลักฐานที่ตรวจสอบแล้ว การขยายงานใดๆ หลังจากนั้นต้องผ่านความต้องการที่พิสูจน์ได้ สิทธิตามกฎหมาย ขีดความสามารถในการดำเนินงาน ผลตอบแทนที่ปรับความเสี่ยงแล้วเป็นบวก และการอนุมัติที่บันทึกไว้</p>
+<div class="gx" data-gx="decisions" data-lang="th"><div class="gx-asks">
+ <div><i>1</i><span>รับรองฐานผลการดำเนินงานของอาคาร และแนวทางต่อสัญญาผู้เช่าหลักเดือนเมษายน 2027</span></div>
+ <div><i>2</i><span>อนุมัติทะเบียนพื้นที่ว่างรายยูนิตที่ตรวจสอบได้ และนโยบายการปล่อยเช่าด้วยค่าเช่าสุทธิที่มีผลจริง</span></div>
+ <div><i>3</i><span>ตกลงลำดับความสำคัญด้านบริการผู้เช่าและงานปรับปรุงทางเทคนิคที่เหมาะสม</span></div>
+ <div><i>4</i><span>เลือกเฉพาะโครงการนำร่องในอาคารที่ผ่านการวิเคราะห์และย้อนกลับได้</span></div>
+ <div><i>5</i><span>กำหนดอำนาจหน้าที่และเกณฑ์การลงทุนแยกสำหรับเครื่องยนต์ที่ 2 และ New S-Curve</span></div>
+</div></div>
+</article></main><script>document.querySelectorAll(".sw button").forEach(function(b){b.addEventListener("click",function(){var l=b.dataset.l;document.querySelectorAll(".sw button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});document.getElementById("pv-en").hidden=l!=="en";document.getElementById("pv-th").hidden=l!=="th";})});</script>
+<script id="gx-js">
+(function(){
+function fmt(n,d){return Number(n).toLocaleString('en-US',{minimumFractionDigits:d||0,maximumFractionDigits:d||0})}
+function q(r,s){return r.querySelector(s)}
+function qa(r,s){return [].slice.call(r.querySelectorAll(s))}
+function L(root){return root.getAttribute('data-lang')==='th'}
+function T(root,en,th){return L(root)?th:en}
+
+/* ---------- engines ---------- */
+var ENG=[
+ {c:'#f2c86a',w:['Immediate and continuous','ทันทีและต่อเนื่อง'],h:['Protect and grow GMM Grammy Place','ปกป้องและเติบโต GMM Grammy Place'],
+  li:[['Secure the GMM group lease (17,137.33 sq.m.) ahead of 30 April 2027','ต่อสัญญากลุ่ม GMM (17,137.33 ตร.ม.) ก่อน 30 เมษายน 2027'],['Validate leased occupancy against certified NLA and the signed rent roll','ยืนยันอัตราการเช่ากับ NLA ที่รับรองและ rent roll ที่ลงนาม'],['Improve rent collection, net effective rent and NOI','เพิ่มการเก็บค่าเช่า ค่าเช่าสุทธิ และ NOI'],['Position the tower as an office, lifestyle, entertainment and creative destination','วางตำแหน่งอาคารเป็นจุดหมายด้านสำนักงาน ไลฟ์สไตล์ บันเทิง และธุรกิจสร้างสรรค์']],
+  g:['Certified areas, signed lease data, legal and engineering review, approved budgets before any commitment.','พื้นที่ที่รับรอง ข้อมูลสัญญาที่ลงนาม การตรวจด้านกฎหมายและวิศวกรรม และงบที่อนุมัติ ก่อนผูกพันใดๆ']},
+ {c:'#2dd4bf',w:['Due diligence in Year 1 · activation from Year 2','ตรวจสอบในปีที่ 1 · เริ่มดำเนินการปีที่ 2'],h:['Geurt Fah-led adjacent expansion','การขยายธุรกิจที่เกิดฟ้าเป็นผู้นำ'],
+  li:[['Reversible owner-run alternatives for genuinely unlet suites, e.g. an NGEEP pilot','ทางเลือกที่เจ้าของบริหารเองแบบย้อนกลับได้สำหรับยูนิตที่ปล่อยไม่ได้จริง เช่น NGEEP นำร่อง'],['Luxury holiday properties in Khao Yai and Chiang Mai: units × nights × occupancy × ADR','บ้านพักตากอากาศหรูที่เขาใหญ่และเชียงใหม่: จำนวนหลัง × คืน × อัตราเข้าพัก × ADR'],['Sukhumvit 38 land: ground lease or permitted interim use','ที่ดินสุขุมวิท 38: ให้เช่าที่ดินระยะยาวหรือใช้ประโยชน์ชั่วคราวที่ได้รับอนุญาต'],['Per-asset NOI, cash collection and quarterly portfolio review','NOI รายทรัพย์สิน การเก็บเงิน และทบทวนพอร์ตรายไตรมาส']],
+  g:['Verified title, written management mandate, lawful use, hotel/lease permits and a private-use protocol.','กรรมสิทธิ์ที่ตรวจสอบแล้ว อำนาจบริหารเป็นลายลักษณ์อักษร การใช้ที่ถูกกฎหมาย ใบอนุญาตโรงแรม/การเช่า และข้อตกลงการใช้ส่วนตัว']},
+ {c:'#b48cff',w:['Exploratory · one paying pilot client first','ทดลอง · เริ่มจากลูกค้านำร่องที่จ่ายเงินหนึ่งราย'],h:['Asset-light services for outside clients','บริการแบบ asset-light สำหรับลูกค้าภายนอก'],
+  li:[['Outsourced leasing coordination and asset-management reporting','บริการประสานการปล่อยเช่าและรายงานการบริหารสินทรัพย์'],['Premium guest and resident experience with qualified partners','บริการลูกค้าและผู้พักอาศัยระดับพรีเมียมร่วมกับพันธมิตร'],['Commercial intelligence, tenant-mix diagnostics and performance dashboards','ข้อมูลเชิงพาณิชย์ การวิเคราะห์ส่วนผสมผู้เช่า และแดชบอร์ดผลการดำเนินงาน']],
+  g:['A signed external scope, positive fee contribution, clear liability and delivery capacity. No New S-Curve revenue is assumed today.','ขอบเขตงานที่ลงนามกับลูกค้าภายนอก ค่าธรรมเนียมที่มีกำไร ความรับผิดชัดเจน และกำลังส่งมอบ ปัจจุบันไม่สมมติรายได้ใดจาก New S-Curve']}
+];
+var GANTT=[
+ [['First Engine','เครื่องยนต์ที่ 1'],'#f2c86a',[[1,3,['Stabilise rent roll','ปรับฐาน rent roll']],[4,24,['Leasing, renewal and NOI — continuous','ปล่อยเช่า ต่อสัญญา และ NOI — ต่อเนื่อง']]]],
+ [['Anchor renewal','ต่อสัญญาผู้เช่าหลัก'],'#ff6b86',[[1,6,['Notice dates → terms agreed','วันแจ้ง → ตกลงเงื่อนไข']]]],
+ [['Second Engine','เครื่องยนต์ที่ 2'],'#2dd4bf',[[1,3,['Mandate','อำนาจ']],[4,6,['Asset register','ทะเบียนทรัพย์']],[7,12,['Underwrite + approve','วิเคราะห์ + อนุมัติ']],[13,18,['Launch pilots','เริ่มนำร่อง']],[19,24,['Scale winners','ขยายที่ได้ผล']]]],
+ [['New S-Curve','New S-Curve'],'#b48cff',[[7,12,['Demand test','ทดสอบความต้องการ']],[13,24,['One paying pilot client','ลูกค้านำร่องที่จ่ายเงินหนึ่งราย']]]]
+];
+function initEngines(root){
+  var i=L(root)?1:0,cur=0;
+  function draw(){
+    var e=ENG[cur];
+    q(root,'.gx-engbody').innerHTML='<span class="gx-k" style="color:'+e.c+'">'+e.w[i]+'</span><h4 style="font-size:1.15em">'+e.h[i]+'</h4><ul>'+e.li.map(function(x){return '<li>'+x[i]+'</li>'}).join('')+'</ul><div class="gx-gate"><b>'+(i?'เงื่อนไข: ':'Gate: ')+'</b>'+e.g[i]+'</div>';
+    qa(root,'.gx-btns button').forEach(function(b){b.setAttribute('aria-pressed',+b.dataset.e===cur)});
+    qa(root,'.gx-plate').forEach(function(p){p.classList.toggle('on',+p.dataset.e===cur);p.classList.toggle('dim',+p.dataset.e!==cur)});
+  }
+  qa(root,'.gx-btns button,.gx-plate').forEach(function(b){b.addEventListener('click',function(){cur=+b.dataset.e;draw()})});
+  var st=q(root,'.gx-stack'),sc=q(root,'.gx-scene');
+  st.addEventListener('pointermove',function(ev){var r=st.getBoundingClientRect(),x=(ev.clientX-r.left)/r.width-.5,y=(ev.clientY-r.top)/r.height-.5;sc.style.transform='rotateX('+(58-y*14)+'deg) rotateZ('+(-38+x*24)+'deg)'});
+  st.addEventListener('pointerleave',function(){sc.style.transform=''});
+  var h='<div class="gx-gr h"><div style="text-align:left">'+(i?'เดือน':'Month')+'</div>';for(var m=1;m<=24;m++)h+='<div>'+m+'</div>';h+='</div>';
+  GANTT.forEach(function(r){h+='<div class="gx-gr"><div class="n">'+r[0][i]+'</div>';r[2].forEach(function(b){h+='<div class="gx-bar" style="grid-column:'+(b[0]+1)+' / '+(b[1]+2)+';background:'+r[1]+'" title="'+b[2][i]+'">'+b[2][i]+'</div>'});h+='</div>'});
+  q(root,'.gx-ganttbody').innerHTML='<h4 style="margin:0 0 8px;color:#fff">'+(i?'แผนดำเนินงานคู่ขนาน 2 ปี':'Two-year parallel roadmap')+'</h4>'+h;
+  draw();
+}
+
+/* ---------- concepts ---------- */
+var FLOORS={'24':['24 · 2401–03',943.65,850],'17':['17 · 1703–1710',840,850],'18':['18 · 1801–1810',449.30,850],'13':['13 · 1302 + 1311',409.95,850],'B2':['B2 · B202 + B210',128.04,1100]};
+var CON=[
+ {n:['Charter pub, DJ & dining','Charter ผับ ดีเจ และห้องอาหาร'],
+  d:['After-work pub and dining lounge opening at 16:00 with DJ area, VIP events, kitchen and back of house. Not a confirmed tenant or live negotiation.','ผับและห้องอาหารหลังเลิกงาน เปิด 16:00 มีโซนดีเจ ห้องจัดเลี้ยง VIP ครัว และพื้นที่หลังบ้าน ยังไม่ใช่ผู้เช่าที่ยืนยันหรือการเจรจาจริง'],
+  extra:['Sales hurdle: rent at 12% of sales needs about THB 6.68m of monthly sales on Floor 24.','ยอดขายขั้นต่ำ: หากค่าเช่าเป็น 12% ของยอดขาย ต้องมียอดขายราว 6.68 ล้านบาท/เดือน สำหรับชั้น 24'],
+  fit:{'24':['y',['Preferred: kitchen, exhaust, goods-lift scheduling, acoustics, licensing','ตัวเลือกแรก: ครัว ระบบดูดควัน ตารางลิฟต์ขนของ เสียง และใบอนุญาต']],'17':['c',['Only if the six units are contiguous','เฉพาะเมื่อ 6 ยูนิตต่อเนื่องกัน']],'18':['c',['Only with a workable continuous layout','เฉพาะเมื่อผังต่อเนื่องใช้งานได้']],'13':['c',['Only with a workable continuous layout','เฉพาะเมื่อผังต่อเนื่องใช้งานได้']],'B2':['n',['128.04 sq.m. is too small for the brief','128.04 ตร.ม. เล็กเกินไปสำหรับแนวคิดนี้']]}},
+ {n:['Cubic Social Club fitness','Cubic Social Club ฟิตเนส'],
+  d:['Premium gym with HIIT, strength, personal training, cycling and corporate wellness. Cubic runs a 36th-floor club at Mochit, which shows height experience but not this slab\'s capacity.','ฟิตเนสพรีเมียม HIIT เวทเทรนนิ่ง เทรนเนอร์ส่วนตัว ปั่นจักรยาน และสุขภาพองค์กร Cubic มีสาขาชั้น 36 ที่หมอชิต แสดงประสบการณ์บนที่สูง แต่ไม่ได้พิสูจน์ว่าพื้นอาคารนี้รับได้'],
+  extra:['Test membership business case, showers, drains and security; keep the fitted-office fallback.','ทดสอบแผนธุรกิจสมาชิก ห้องอาบน้ำ ท่อระบาย และความปลอดภัย และคงแผนสำรองเป็นสำนักงานตกแต่ง'],
+  fit:{'17':['y',['Preferred if contiguous: slab loading, vibration, sound transfer','ตัวเลือกแรกหากต่อเนื่อง: การรับน้ำหนักพื้น แรงสั่น การส่งผ่านเสียง']],'24':['y',['Principal alternative','ทางเลือกหลัก']],'18':['c',['Smaller boutique format only','เฉพาะรูปแบบบูติกขนาดเล็ก']],'13':['c',['Smaller boutique format only','เฉพาะรูปแบบบูติกขนาดเล็ก']],'B2':['n',['Too small','เล็กเกินไป']]}},
+ {n:['Too Fast To Sleep study café','Too Fast To Sleep คาเฟ่ติว'],
+  d:['Conditional prospect, not a priority anchor. The Siam Square Soi 1 branch closed on 24 December 2025. Paid study passes and dwell-time controls are the model to test.','ผู้สนใจที่มีเงื่อนไข ไม่ใช่ผู้เช่าหลักลำดับแรก สาขาสยามสแควร์ซอย 1 ปิดเมื่อ 24 ธันวาคม 2025 รูปแบบที่ต้องทดสอบคือบัตรนั่งติวแบบเสียเงินและการจำกัดเวลานั่ง'],
+  extra:['Request branch network, audited accounts, per-branch margins and credit support before reserving space.','ขอข้อมูลสาขา งบที่ตรวจสอบ กำไรรายสาขา และหลักประกันก่อนจองพื้นที่'],
+  fit:{'13':['c',['Conditional: 1302 or a compact suite only','มีเงื่อนไข: 1302 หรือยูนิตขนาดเล็กเท่านั้น']],'18':['c',['Possible compact format','รูปแบบขนาดเล็กที่เป็นไปได้']],'17':['n',['Do not reserve a whole floor for the brand','ไม่จองทั้งชั้นเพียงเพราะแบรนด์']],'24':['n',['Do not reserve a whole floor for the brand','ไม่จองทั้งชั้นเพียงเพราะแบรนด์']],'B2':['n',['Unsuitable','ไม่เหมาะสม']]}},
+ {n:['Pre-loved luxury resale','ร้านแบรนด์เนมมือสองคัดสรร'],
+  d:['Appointment-led designer handbags, clothing and accessories with authentication, consignment consultation, CCTV and insured storage.','ร้านกระเป๋า เสื้อผ้า และเครื่องประดับแบรนด์เนม นัดหมายล่วงหน้า มีการตรวจสอบของแท้ ให้คำปรึกษาฝากขาย CCTV และคลังประกันภัย'],
+  extra:['B202 at THB 1,100/sq.m. benchmarks at THB 104,379 a month.','B202 ที่ 1,100 บาท/ตร.ม. มีค่าเช่าเทียบ 104,379 บาท/เดือน'],
+  fit:{'B2':['y',['B202 preferred; confirm frontage and no duplicate category','B202 เป็นตัวเลือกแรก ยืนยันหน้าร้านและไม่ซ้ำประเภท']],'13':['n',['Retail needs footfall, not an office floor','ร้านค้าต้องการคนผ่าน ไม่ใช่ชั้นสำนักงาน']],'17':['n',['Office floor','ชั้นสำนักงาน']],'18':['n',['Office floor','ชั้นสำนักงาน']],'24':['n',['Office floor','ชั้นสำนักงาน']]}},
+ {n:['Fitted office suites (fallback)','สำนักงานตกแต่งพร้อมใช้ (แผนสำรอง)'],
+  d:['The comparator every concept must beat: ready-to-occupy 100–400 sq.m. suites priced on net effective rent, with measured fit-out cost and a minimum lease term.','ตัวเทียบที่ทุกแนวคิดต้องทำได้ดีกว่า: ยูนิตพร้อมเข้าใช้ 100–400 ตร.ม. ตั้งราคาด้วยค่าเช่าสุทธิ มีต้นทุนตกแต่งที่วัดได้ และระยะสัญญาขั้นต่ำ'],
+  extra:['No speculative fit-out without a unit plan, costed MEP survey, deposit, credit review and breakeven month.','ไม่ลงทุนตกแต่งแบบเก็งกำไร หากไม่มีผังยูนิต สำรวจ MEP พร้อมราคา เงินมัดจำ ตรวจเครดิต และเดือนคุ้มทุน'],
+  fit:{'24':['y',['Subdivided modules','แบ่งเป็นโมดูล']],'17':['y',['Phased fitted suites','ทยอยตกแต่งเป็นยูนิต']],'18':['y',['Compact suites','ยูนิตขนาดเล็ก']],'13':['y',['Compact suites','ยูนิตขนาดเล็ก']],'B2':['n',['Retail level','ชั้นร้านค้า']]}}
+];
+var MICRO=[['Express nail bar','บาร์ทำเล็บด่วน','15–35 min'],['Lash extension & lift','ต่อขนตาและลิฟติ้ง',''],['Wash-and-blow-dry bar','บาร์สระไดร์',''],['Brow styling','จัดทรงคิ้ว',''],['Express waxing & threading','แว็กซ์และถอนขนด่วน',''],['Express head-spa','สปาหนังศีรษะด่วน',''],['Make-up touch-up','แต่งหน้าด่วนก่อนถ่ายทำ',''],['Personal colour consultation','วิเคราะห์สีผิวและการแต่งกาย','20–60 min'],['Men’s / unisex grooming','กรูมมิ่งชาย/ยูนิเซ็กซ์',''],['Charm & phone-strap atelier','ร้านทำชาร์มและสายคล้องโทรศัพท์','10–25 min'],['Digital nail-art printer','เครื่องพิมพ์ลายเล็บดิจิทัล',''],['Compact florist / curated gifts','ร้านดอกไม้/ของขวัญคัดสรร','']];
+function initConcepts(root){
+  var i=L(root)?1:0,cur=0;
+  var bt=q(root,'.gx-cbtns');bt.innerHTML=CON.map(function(c,k){return '<button type="button" data-k="'+k+'" aria-pressed="'+(k===0)+'">'+c.n[i]+'</button>'}).join('');
+  var lab={y:['Strong fit','เหมาะสม'],c:['Conditional','มีเงื่อนไข'],n:['Not suitable','ไม่เหมาะสม']};
+  function draw(){
+    var c=CON[cur];
+    q(root,'.gx-mbody').innerHTML=['24','17','18','13','B2'].map(function(f){var F=FLOORS[f],x=c.fit[f];
+      return '<tr><td><b>'+F[0]+'</b></td><td>'+fmt(F[1],2)+(i?' ตร.ม.':' sq.m.')+'</td><td><span class="gx-fit '+x[0]+'">'+lab[x[0]][i]+'</span></td><td>THB '+fmt(F[1]*F[2])+(i?' /เดือน':' /month')+'<br><small style="color:#94a3b8">@ '+fmt(F[2])+'</small></td><td>'+x[1][i]+'</td></tr>'}).join('');
+    q(root,'.gx-cinfo').innerHTML='<h4>'+c.n[i]+'</h4><p>'+c.d[i]+'</p><div class="gx-gate"><b>'+(i?'เงื่อนไขตัดสินใจ: ':'Decision gate: ')+'</b>'+c.extra[i]+'</div>';
+    qa(bt,'button').forEach(function(b){b.setAttribute('aria-pressed',+b.dataset.k===cur)});
+  }
+  bt.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;cur=+b.dataset.k;draw()});
+  q(root,'.gx-micro').innerHTML=MICRO.map(function(m){return '<div class="gx-chip"><b>'+m[i]+'</b>'+(m[2]?'<i>'+m[2]+'</i>':'')+'</div>'}).join('');
+  draw();
+}
+
+/* ---------- direct alternatives ---------- */
+var GATES=[[['Verify inventory','ตรวจสอบพื้นที่'],['Reconcile lease status, rentable area, unit access, engineering capacity and permitted use.','กระทบยอดสถานะสัญญา พื้นที่เช่า การเข้าถึงยูนิต ขีดความสามารถทางวิศวกรรม และการใช้ที่ได้รับอนุญาต'],['Certified unit-level vacancy and an approved lettable plan.','พื้นที่ว่างรายยูนิตที่รับรองและแผนการปล่อยเช่าที่อนุมัติ']],
+ [['Market test','ทดสอบตลาด'],['Distribute authorised listings, contact qualified tenants, track visits, interest and terms.','เผยแพร่ประกาศที่ได้รับอนุญาต ติดต่อผู้เช่าที่ผ่านคัดกรอง ติดตามการเข้าชม ความสนใจ และเงื่อนไข'],['30–60 days of marketing evidence; viability of third-party offers.','หลักฐานการตลาด 30–60 วัน และความเป็นไปได้ของข้อเสนอจากผู้เช่าภายนอก']],
+ [['Appraise alternatives','ประเมินทางเลือก'],['Compare third-party letting, fitted-space leasing, specialist concession and owner operation on risk-adjusted cash flow.','เปรียบเทียบการปล่อยเช่า ยูนิตตกแต่ง สัมปทาน และการบริหารเอง ด้วยกระแสเงินสดที่ปรับความเสี่ยงแล้ว'],['Net effective rent, fit-out cost, NOI contribution, capex payback and a downside case.','ค่าเช่าสุทธิ ต้นทุนตกแต่ง NOI ระยะคืนทุน และกรณีเลวร้าย']],
+ [['Reversible pilot','นำร่องแบบย้อนกลับได้'],['Proceed only where demand, safety, licences, funding and an exit support a limited trial.','ดำเนินการเมื่อความต้องการ ความปลอดภัย ใบอนุญาต งบประมาณ และทางออกรองรับการทดลองแบบจำกัด'],['Approved 90–180-day pilot budget, operating owner and measurable KPIs.','งบนำร่อง 90–180 วันที่อนุมัติ ผู้รับผิดชอบ และ KPI ที่วัดได้']],
+ [['Review and choose','ทบทวนและเลือก'],['Compare pilot performance with the market rent forgone; keep the right to re-let.','เปรียบเทียบผลนำร่องกับค่าเช่าตลาดที่เสียไป และคงสิทธิ์ในการปล่อยเช่าใหม่'],['Scale, partner, restructure, exit or return to conventional leasing.','ขยาย หาพันธมิตร ปรับโครงสร้าง ยุติ หรือกลับไปปล่อยเช่าตามปกติ']]];
+function initDirect(root){
+  var i=L(root)?1:0,cur=0,box=q(root,'.gx-stepbtns');
+  box.innerHTML=GATES.map(function(g,k){return '<button type="button" class="gx-step'+(k===0?' on':'')+'" data-k="'+k+'"><span class="s">'+(i?'ขั้นที่ ':'GATE ')+(k+1)+'</span><b>'+g[0][i]+'</b></button>'}).join('');
+  function draw(){var g=GATES[cur];q(root,'.gx-stepinfo').innerHTML='<p style="margin:0 0 6px">'+g[1][i]+'</p><b>'+(i?'ผลลัพธ์: ':'Output: ')+'</b>'+g[2][i];
+    qa(box,'.gx-step').forEach(function(b){b.classList.toggle('on',+b.dataset.k===cur)})}
+  box.addEventListener('click',function(e){var b=e.target.closest('.gx-step');if(!b)return;cur=+b.dataset.k;draw()});
+  var OC=[[['Floor 18 · 449.30 sq.m.','ชั้น 18 · 449.30 ตร.ม.'],381905,'#f2c86a'],[['Floor 13 · 1302 · 155.86 sq.m.','ชั้น 13 · 1302 · 155.86 ตร.ม.'],132481,'#f2c86a'],[['B202 · 94.89 sq.m.','B202 · 94.89 ตร.ม.'],104379,'#2dd4bf'],[['B210 · 33.15 sq.m.','B210 · 33.15 ตร.ม.'],36465,'#2dd4bf']];
+  q(root,'.gx-oc').innerHTML=OC.map(function(o){return '<div class="gx-br"><span>'+o[0][i]+'</span><div class="t"><div class="f" style="width:'+(o[1]/381905*100)+'%;background:'+o[2]+'"></div></div><span class="v">THB '+fmt(o[1])+(i?'/เดือน':'/mo')+'</span></div>'}).join('')+'<p class="gx-note">'+(i?'ค่าเช่ารวมตามตัวอย่างที่ 850 บาท (สำนักงาน) และ 1,100 บาท (ร้านค้า) ต่อ ตร.ม. ต่อเดือน ก่อนหักสิ่งจูงใจและต้นทุน':'Illustrative gross rent at THB 850 (office) and 1,100 (retail) per sq.m. per month, before incentives and costs.')+'</p>';
+  draw();
+}
+
+/* ---------- value ---------- */
+function initValue(root){
+  var i=L(root)?1:0;
+  var ANCH=17137.33*864.63*12,POOL=35100000;
+  function v(k){return +q(root,'[data-i="'+k+'"]').value}
+  function m(x){return fmt(x/1e6,1)+'m'}
+  function draw(){
+    var let_=v('let')/100,disc=v('disc')/100,sur=v('sur')/100,mar=v('mar')/100,cap=v('cap')/100;
+    q(root,'[data-o="let"]').textContent=Math.round(let_*100)+'%';q(root,'[data-o="disc"]').textContent=Math.round(disc*100)+'%';
+    q(root,'[data-o="sur"]').textContent=Math.round(sur*100)+'%';q(root,'[data-o="mar"]').textContent=Math.round(mar*100)+'%';q(root,'[data-o="cap"]').textContent=(cap*100).toFixed(2)+'%';
+    var nP=ANCH*sur*mar,nG=POOL*let_*(1-disc)*mar,vP=nP/cap,vG=nG/cap,mx=Math.max(vP,vG,1);
+    q(root,'.gx-vprot').textContent=m(vP);q(root,'.gx-vgrow').textContent=m(vG);
+    q(root,'.gx-vbars').innerHTML='<div class="gx-br"><span>'+(i?'รักษา: NOI ':'Protect: NOI ')+m(nP)+(i?'/ปี':'/yr')+'</span><div class="t"><div class="f" style="width:'+(vP/mx*100)+'%;background:#f2c86a"></div></div><span class="v">THB '+m(vP)+'</span></div>'+
+      '<div class="gx-br"><span>'+(i?'เติบโต: NOI ':'Grow: NOI ')+m(nG)+(i?'/ปี':'/yr')+'</span><div class="t"><div class="f" style="width:'+(vG/mx*100)+'%;background:#2dd4bf"></div></div><span class="v">THB '+m(vG)+'</span></div>';
+    var area=fmt(17137.33*sur),msg;
+    if(vP>=vG)msg=i?'การรักษาพื้นที่ผู้เช่าหลัก '+Math.round(sur*100)+'% ('+area+' ตร.ม.) มีมูลค่ามากกว่าการปล่อยเช่า '+Math.round(let_*100)+'% ของพื้นที่ที่ประกาศ การต่อสัญญาจึงต้องมาก่อน':'Keeping '+Math.round(sur*100)+'% of the anchor ('+area+' sq.m.) is worth more than capturing '+Math.round(let_*100)+'% of the advertised pool. Renewal comes first.';
+    else msg=i?'ด้วยสมมติฐานนี้ การปล่อยเช่าสร้างมูลค่ามากกว่า แต่ทั้งสองงานยังต้องทำคู่ขนาน':'With these inputs, lease-up adds more value than the protected anchor share. Both workstreams still run in parallel.';
+    q(root,'.gx-verdict').innerHTML=msg+'<small>'+(i?'รวม: มูลค่าสินทรัพย์ ':'Together: THB ')+m(vP+vG)+(i?' บาท จาก NOI ราว ':' of asset value from about THB ')+m(nP+nG)+(i?' บาทต่อปี':' NOI a year')+'</small>';
+  }
+  qa(root,'input[type=range]').forEach(function(r){r.addEventListener('input',draw)});
+  var AB=[25,50,75,100],ab=q(root,'.gx-absorb');
+  ab.innerHTML=AB.map(function(p){return '<button type="button" data-p="'+p+'" aria-pressed="'+(p===50)+'"><div class="p">'+p+'%</div><div class="m">THB '+fmt(POOL*p/100/1e6,2)+'m '+(i?'ต่อปี':'a year')+'</div><div class="m" style="color:#94a3b8">≈ '+fmt(3788.77*p/100)+(i?' ตร.ม.':' sq.m.')+'</div></button>'}).join('');
+  ab.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;qa(ab,'button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});q(root,'[data-i="let"]').value=b.dataset.p;draw()});
+  var LV=[['#f2c86a',['PROTECT','รักษา'],['Anchor income','รายได้ผู้เช่าหลัก'],'THB 14.82m',['a month at the disclosed rate. A 10% surrender is about 1,714 sq.m., or 4.45 occupancy points.','ต่อเดือนตามอัตราที่เปิดเผย การคืนพื้นที่ 10% เท่ากับราว 1,714 ตร.ม. หรือ 4.45 จุดของอัตราการเช่า'],['Renewal agreed ahead of 30 Apr 2027','ต่อสัญญาก่อน 30 เม.ย. 2027']],
+   ['#2dd4bf',['FILL','เติมพื้นที่'],['Occupancy recovery','ฟื้นฟูอัตราการเช่า'],'385.02 m²',['per occupancy point. Convert only verified, ready-to-let suites; portal counts are not stock.','ต่อ 1 จุดของอัตราการเช่า ปิดดีลเฉพาะยูนิตที่ตรวจสอบแล้วและพร้อมเช่า จำนวนประกาศไม่ใช่พื้นที่จริง'],['Net absorption, signed NLA','Net absorption, NLA ที่ลงนาม']],
+   ['#6f93ff',['PRICE','ราคา'],['Rental quality','คุณภาพค่าเช่า'],'THB 711',['per sq.m. is what THB 800 headline becomes after 3 free months and a leasing fee on 36 months.','ต่อ ตร.ม. คือค่าเช่าที่ได้จริงจากราคาประกาศ 800 บาท หลังเช่าฟรี 3 เดือนและค่านายหน้า ในสัญญา 36 เดือน'],['NER by floor and deal','NER รายชั้นและรายดีล']],
+   ['#ff6b86',['COLLECT','เก็บเงิน'],['Cash and recoveries','เงินสดและการเรียกคืนค่าใช้จ่าย'],'98%',['working collection KPI, with arrears at 30/60/100 days and service-charge recovery against recoverable cost.','KPI การเก็บค่าเช่า ติดตามหนี้ค้าง 30/60/100 วัน และการเรียกคืนค่าบริการเทียบต้นทุน'],['Collected ÷ billed rent','ค่าเช่าที่เก็บได้ ÷ ที่เรียกเก็บ']],
+   ['#b48cff',['ACTIVATE','สร้างจุดหมาย'],['Destination and amenity','จุดหมายและสิ่งอำนวยความสะดวก'],['5 dayparts','5 ช่วงเวลา'],['Morning arrivals, working day, afternoon pick-up, after 16:00 and weekends each bring a different customer.','ช่วงเช้า ระหว่างวัน บ่ายรอรับ หลัง 16:00 และวันหยุด แต่ละช่วงมีลูกค้าต่างกัน'],['Contribution vs rent forgone','กำไรเทียบค่าเช่าที่เสียไป']],
+   ['#e2e8f0',['INVEST','ลงทุน'],['Capital efficiency','ประสิทธิภาพเงินลงทุน'],'YoC · NPV',['Base, downside and no-investment cases for every capex request; savings proven with meter readings.','ทุกคำของบลงทุนต้องมีกรณีฐาน กรณีเลวร้าย และกรณีไม่ลงทุน การประหยัดต้องพิสูจน์ด้วยค่ามิเตอร์'],['Yield on cost, payback, NPV','Yield on cost, ระยะคืนทุน, NPV']]];
+  q(root,'.gx-levers').innerHTML=LV.map(function(l){var n=Array.isArray(l[3])?l[3][i]:l[3];return '<div class="gx-card" style="border-top:3px solid '+l[0]+'"><span class="gx-k" style="color:'+l[0]+'">'+l[1][i]+'</span><h4>'+l[2][i]+'</h4><div style="font-size:1.3em;font-weight:800;color:'+l[0]+'">'+n+'</div><p>'+l[4][i]+'</p><div class="gx-gate"><b>KPI · </b>'+l[5][i]+'</div></div>'}).join('');
+  draw();
+}
+
+/* ---------- frameworks ---------- */
+var SW={S:{c:'#2dd4bf',t:['Strengths','จุดแข็ง'],it:[['S1',['Location and dual vehicular access','ทำเลและทางเข้าออก 2 ฝั่ง'],'High'],['S2',['Media ecosystem and recognisable identity','ระบบนิเวศสื่อและเอกลักษณ์ที่คนจดจำ'],'High'],['S3',['Suite-size range','ยูนิตหลากหลายขนาด'],'Medium'],['S4',['Flexible AC hour windows','เลือกช่วงเวลาเปิดแอร์ได้'],'Medium']]},
+ W:{c:'#ff6b86',t:['Weaknesses','จุดอ่อน'],it:[['W1',['Inconsistent public inventory','ข้อมูลพื้นที่ว่างสาธารณะไม่ตรงกัน'],'Critical'],['W2',['Unverified floor and unit boundaries','ขอบเขตชั้นและยูนิตยังไม่ยืนยัน'],'High'],['W3',['Ageing asset versus new supply','อาคารเก่าเทียบกับอาคารใหม่'],'High'],['W4',['Address and advert conflicts','ที่อยู่บริษัทขัดแย้งกับประกาศ'],'High']]},
+ O:{c:'#6f93ff',t:['Opportunities','โอกาส'],it:[['O1',['Fitted, move-in-ready demand','ความต้องการยูนิตพร้อมเข้าใช้'],'High'],['O2',['Tenant experience and visitor-flow design','ประสบการณ์ผู้เช่าและการจัดการผู้มาเยือน'],'Medium'],['O3',['Energy monitoring and resilience','การติดตามพลังงานและความยืดหยุ่น'],'Medium'],['O4',['Retail ancillary revenue','รายได้เสริมจากร้านค้า'],'Medium']]},
+ T:{c:'#f2c86a',t:['Threats','อุปสรรค'],it:[['T1',['2027 anchor renewal exposure','ความเสี่ยงต่อสัญญาผู้เช่าหลักปี 2027'],'Critical'],['T2',['Office competitive vacancy','การแข่งขันจากพื้นที่ว่างในตลาด'],'High'],['T3',['High rent-free and fit-out incentives','สิ่งจูงใจเช่าฟรีและตกแต่งสูง'],'High'],['T4',['Compliance and reputation','การปฏิบัติตามกฎหมายและชื่อเสียง'],'Medium']]}};
+var PRL={Critical:['Critical','วิกฤต'],High:['High','สูง'],Medium:['Medium','กลาง']};
+var TOWS=[['SO','S1+O1',['Use dual access and flexible sizes to sell ready-to-occupy SME and creative offices','ใช้ทางเข้า 2 ฝั่งและขนาดที่ยืดหยุ่น ขายสำนักงานพร้อมเข้าใช้ให้ SME และธุรกิจสร้างสรรค์'],['Validate demand and fit-out economics first · Leasing, Engineering · KPI: NER, conversion','ยืนยันความต้องการและต้นทุนตกแต่งก่อน · ปล่อยเช่า วิศวกรรม · KPI: NER การปิดดีล']],
+ ['SO','S2+O4',['Test media-adjacent retail and amenity demand','ทดสอบความต้องการร้านค้าและบริการที่เชื่อมกับสื่อ'],['Usage research, permissions and event operations before marketing · Leasing, Tenant Services','วิจัยการใช้งาน ขออนุญาต และวางระบบอีเวนต์ก่อนทำตลาด · ปล่อยเช่า บริการผู้เช่า']],
+ ['SO','S4+O3',['Turn flexible cooling into a measured value proposition','เปลี่ยนความยืดหยุ่นของระบบแอร์เป็นจุดขายที่วัดผลได้'],['Metering and budget before any energy claim · Engineering, Finance · KPI: kWh/m²','ติดมิเตอร์และงบก่อนอ้างผลประหยัด · วิศวกรรม การเงิน · KPI: kWh/ตร.ม.']],
+ ['WO','W1+O1',['Use clean portal data and structured suite packs to cut search friction','ใช้ข้อมูลประกาศที่ถูกต้องและชุดข้อมูลยูนิตเพื่อลดความยุ่งยากในการค้นหา'],['Controlled rent roll, then publish after approval · KPI: verified listings, time to quote','rent roll ที่ควบคุมแล้วจึงเผยแพร่หลังอนุมัติ · KPI: ประกาศที่ยืนยัน เวลาในการเสนอราคา']],
+ ['WO','W2+O4',['Clarify retail and basement locations before new uses','ยืนยันตำแหน่งร้านค้าและชั้นใต้ดินก่อนใช้งานใหม่'],['Plans, planning limits and landlord rights · Engineering, Legal','ผังพื้น ข้อจำกัดการใช้ และสิทธิ์เจ้าของ · วิศวกรรม กฎหมาย']],
+ ['ST','S2+T2',['Retain key tenants with sector-specific service and renewal interviews','รักษาผู้เช่าหลักด้วยบริการเฉพาะกลุ่มและการสัมภาษณ์ก่อนต่อสัญญา'],['Early engagement on contracts and service issues · KPI: at-risk sq.m.','เริ่มคุยเรื่องสัญญาและบริการแต่เนิ่นๆ · KPI: พื้นที่ที่มีความเสี่ยง']],
+ ['ST','S1+T3',['Sell total operational suitability, not headline rent','ขายความเหมาะสมในการใช้งานโดยรวม ไม่ใช่ราคาประกาศ'],['Net effective term sheets, parking, fit-out and service · KPI: NER, weighted pipeline','ข้อเสนอแบบค่าเช่าสุทธิ ที่จอดรถ การตกแต่ง และบริการ · KPI: NER ไปป์ไลน์ถ่วงน้ำหนัก']],
+ ['WT','W3+T2',['Build the lifecycle and data baseline before major refurbishment','สร้างฐานข้อมูลอายุการใช้งานก่อนปรับปรุงใหญ่'],['Condition survey and capex reserve priorities · KPI: approved capex ROI','สำรวจสภาพและจัดลำดับเงินสำรอง · KPI: ผลตอบแทนงบลงทุนที่อนุมัติ']],
+ ['WT','W4+T1',['No occupancy bridge built on adverts or unverified tenancy','ไม่สร้างตัวเลขอัตราการเช่าจากประกาศหรือผู้เช่าที่ยังไม่ยืนยัน'],['Internal space schedule and signed contracts only · KPI: reconciled occupancy','ใช้ตารางพื้นที่ภายในและสัญญาที่ลงนามเท่านั้น · KPI: อัตราการเช่าที่กระทบยอดแล้ว']]];
+var PEST=[['P','#6f93ff',['Urban mobility and infrastructure','การเดินทางและโครงสร้างพื้นฐาน'],'Mixed','Medium','1–3y',['Sell access as evidenced value; verify real travel times','ขายความสะดวกในการเข้าถึงด้วยหลักฐาน ตรวจเวลาเดินทางจริง']],
+ ['P','#6f93ff',['Creative-industry incentives','สิทธิประโยชน์อุตสาหกรรมสร้างสรรค์'],'Uncertain','Medium','1–3y',['Monitor official eligibility for prospects','ติดตามสิทธิ์ของผู้สนใจเช่าจากแหล่งทางการ']],
+ ['E','#f2c86a',['Grade B oversupply: 73% occupancy, THB 869 ask','อุปทานเกรด B ล้น: อัตราการเช่า 73% ราคา 869 บาท'],'Negative','High','0–12m',['Retention-led growth and concession modelling','เติบโตด้วยการรักษาผู้เช่าและจำลองสิ่งจูงใจ']],
+ ['E','#f2c86a',['New Grade A competition: CBD gross THB 941','การแข่งขันเกรด A ใหม่: CBD 941 บาท'],'Negative','High','0–12m',['Net effective rental underwriting','วิเคราะห์ด้วยค่าเช่าสุทธิ']],
+ ['E','#f2c86a',['Anchor rollover: 44.51% ends Apr 2027','สัญญาผู้เช่าหลัก 44.51% สิ้นสุด เม.ย. 2027'],'Mixed','Critical','0–12m',['Executive-level lease-event programme now','โปรแกรมเหตุการณ์สัญญาระดับผู้บริหารทันที']],
+ ['E','#f2c86a',['Electricity and operating cost','ค่าไฟฟ้าและต้นทุนดำเนินงาน'],'Uncertain','High','0–12m',['Meter baseline and cost-recovery review','ฐานมิเตอร์และทบทวนการเรียกคืนต้นทุน']],
+ ['S','#2dd4bf',['Hybrid working','การทำงานแบบไฮบริด'],'Negative','High','0–12m',['Flexible sizes and retention interviews','ขนาดยืดหยุ่นและสัมภาษณ์เพื่อรักษาผู้เช่า']],
+ ['S','#2dd4bf',['Media visitors vs corporate privacy','ผู้มาเยือนสายสื่อกับความเป็นส่วนตัวขององค์กร'],'Mixed','Medium','0–12m',['Measure flow and safety before redesign','วัดการไหลของคนและความปลอดภัยก่อนปรับปรุง']],
+ ['T','#b48cff',['Digital leasing CRM governance','การกำกับข้อมูลการปล่อยเช่าดิจิทัล'],'Mixed','High','0–12m',['One dated approved content set and response SLA','ข้อมูลที่อนุมัติชุดเดียวพร้อมวันที่ และ SLA การตอบกลับ']],
+ ['T','#b48cff',['Media-specialist occupier specs','ข้อกำหนดของผู้เช่าสายสื่อ'],'Mixed','Medium','1–3y',['Unit technical suitability packs','ชุดข้อมูลความเหมาะสมทางเทคนิครายยูนิต']],
+ ['E','#2dd4bf',['ESG-driven flight to quality','การย้ายไปอาคารคุณภาพตามกระแส ESG'],'Negative','High','1–3y',['Energy benchmarking and budgeted upgrades','เทียบมาตรฐานพลังงานและปรับปรุงตามงบ']],
+ ['E','#2dd4bf',['Flooding and weather resilience','น้ำท่วมและความทนทานต่อสภาพอากาศ'],'Uncertain','High','0–12m',['Check drainage and emergency response','ตรวจระบบระบายน้ำและแผนฉุกเฉิน']],
+ ['L','#ff6b86',['Related-party lease governance','การกำกับสัญญาเช่ากับบุคคลที่เกี่ยวโยง'],'Mixed','High','0–12m',['Arm’s-length terms and SEC/SET approval timetable','เงื่อนไขตามราคาตลาดและตารางอนุมัติ ก.ล.ต./ตลท.']]];
+var DIR={Mixed:['Mixed','ผสม','#cbd5e1'],Uncertain:['Uncertain','ไม่แน่นอน','#a9bcff'],Negative:['Negative','ลบ','#ff9fb1'],Positive:['Positive','บวก','#5eead4']};
+function initFrameworks(root){
+  var i=L(root)?1:0;
+  q(root,'.gx-swot').innerHTML=['S','W','O','T'].map(function(k){var g=SW[k];return '<div class="gx-q" style="border-top:3px solid '+g.c+'"><h4 style="color:'+g.c+'">'+g.t[i]+'</h4>'+g.it.map(function(x){return '<div class="gx-it" data-id="'+x[0]+'"><span class="id" style="color:'+g.c+'">'+x[0]+'</span><span>'+x[1][i]+'</span><span class="gx-pr '+x[2]+'">'+PRL[x[2]][i]+'</span></div>'}).join('')+'</div>'}).join('');
+  var tw=q(root,'.gx-tows');
+  tw.innerHTML=TOWS.map(function(t,k){return '<button type="button" class="gx-tw" data-k="'+k+'" aria-pressed="false"><span class="ty">'+t[0]+'</span><span class="ln">'+t[1]+'</span><span class="tx">'+t[2][i]+'<small>'+t[3][i]+'</small></span></button>'}).join('');
+  tw.addEventListener('click',function(e){var b=e.target.closest('.gx-tw');if(!b)return;var on=b.getAttribute('aria-pressed')!=='true';
+    qa(tw,'.gx-tw').forEach(function(x){x.setAttribute('aria-pressed',x===b&&on)});
+    var ids=on?TOWS[+b.dataset.k][1].split('+'):[];
+    qa(root,'.gx-it').forEach(function(it){var h=ids.indexOf(it.dataset.id)>=0;it.classList.toggle('hl',h);it.classList.toggle('fade',ids.length>0&&!h)});
+  });
+  var hd=i?['','ปัจจัย','ทิศทาง','ความสำคัญ','ช่วงเวลา','การรับมือ']:['','Driver','Direction','Priority','Horizon','Response'];
+  q(root,'.gx-pest-in').innerHTML='<div class="gx-pr-row h">'+hd.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div>'+PEST.map(function(p){var d=DIR[p[3]];
+    return '<div class="gx-pr-row"><span class="gx-letter" style="background:'+p[1]+'">'+p[0]+'</span><span>'+p[2][i]+'</span><span class="gx-dir" style="color:'+d[2]+'">'+d[i]+'</span><span><span class="gx-pr '+p[4]+'">'+PRL[p[4]][i]+'</span></span><span>'+(i?p[5].replace('y',' ปี').replace('m',' เดือน'):p[5].replace('y',' yrs').replace('m',' mths'))+'</span><span>'+p[6][i]+'</span></div>'}).join('');
+}
+
+/* ---------- 12 month ---------- */
+function initTwelve(root){
+  var i=L(root)?1:0;
+  var P=[['Occupancy on consistent definitions','อัตราการเช่าตามนิยามเดียวกัน'],['Lease-event risk','ความเสี่ยงเหตุการณ์สัญญา'],['Net effective rent','ค่าเช่าสุทธิ (NER)'],['Arrears 30/60/100 days','หนี้ค้าง 30/60/100 วัน'],['Enquiries','จำนวนผู้สอบถาม'],['Stage conversions','อัตราการเปลี่ยนแต่ละขั้น'],['Loss reasons','เหตุผลที่เสียดีล'],['Tenant satisfaction','ความพึงพอใจผู้เช่า'],['Safety indicators','ตัวชี้วัดความปลอดภัย'],['Energy (kWh/m²)','พลังงาน (kWh/ตร.ม.)'],['WALE and expiry ladder','WALE และบันไดสัญญาหมดอายุ'],['NOI actual vs budget','NOI จริงเทียบงบ']];
+  q(root,'.gx-packbody').innerHTML=P.map(function(p){return '<span>'+p[i]+'</span>'}).join('');
+}
+
+var INIT={engines:initEngines,concepts:initConcepts,direct:initDirect,value:initValue,frameworks:initFrameworks,twelve:initTwelve};
+function boot(){[].slice.call(document.querySelectorAll('.gx[data-gx]')).forEach(function(r){var f=INIT[r.getAttribute('data-gx')];if(f&&!r.__gx){r.__gx=1;try{f(r)}catch(e){console.error('gx',e)}}})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
+
+<style id="gx-tk-css">
+.gx-tk .gx-calc{display:grid;gap:10px;align-content:start}
+.gx-tk .gx-fx{font-family:ui-monospace,Menlo,monospace;font-size:.78em;line-height:1.6;color:#cbd5e1;background:#020617;border:1px solid #334155;border-radius:10px;padding:9px 11px;overflow-x:auto}
+.gx-tk .gx-in{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.gx-tk .gx-in label{display:grid;gap:4px;font-size:.8em;color:#94a3b8;line-height:1.35;min-width:0}
+.gx-tk .gx-in input[type=number]{width:100%;min-width:0;background:#020617;color:#fff;border:1px solid #334155;border-radius:8px;padding:7px 9px;font:inherit;font-size:1.05em;font-variant-numeric:tabular-nums}
+.gx-tk .gx-in input[type=number]:focus{outline:2px solid #12a7cf;outline-offset:1px}
+.gx-tk .gx-in input::placeholder{color:#64748b}
+.gx-tk .gx-chk{grid-column:1/-1;display:flex!important;align-items:flex-start;gap:8px;color:#cbd5e1!important;font-size:.84em!important}
+.gx-tk .gx-chk input{margin-top:3px;accent-color:#12a7cf;width:16px;height:16px;flex:none}
+.gx-tk .gx-out{background:#132643;border-radius:12px;padding:12px 14px;display:grid;gap:6px}
+.gx-tk .gx-row{display:flex;justify-content:space-between;gap:10px;font-size:.88em;color:#cbd5e1;align-items:baseline}
+.gx-tk .gx-row b{color:#fff;font-size:1.15em;font-variant-numeric:tabular-nums;text-align:right}
+.gx-tk .gx-row.hero b{font-size:1.5em;color:#f2c86a}
+.gx-tk .gx-wait{font-size:.86em;color:#f6d58a}
+.gx-tk .gx-mini{display:grid;gap:6px;margin-top:4px}
+@media (max-width:560px){.gx-tk .gx-in{grid-template-columns:minmax(0,1fr)}}
+</style>
+
+<script id="gx-tk-js">
+(function(){
+function fmt(n,d){return Number(n).toLocaleString('en-US',{minimumFractionDigits:d||0,maximumFractionDigits:d||0})}
+function num(el){if(!el||el.value==='')return null;var v=parseFloat(el.value);return isFinite(v)?v:null}
+function row(lbl,val,hero){return '<div class="gx-row'+(hero?' hero':'')+'"><span>'+lbl+'</span><b>'+val+'</b></div>'}
+function bar(lbl,v,max,c,txt){return '<div class="gx-br"><span>'+lbl+'</span><div class="t"><div class="f" style="width:'+Math.max(0,Math.min(100,v/max*100))+'%;background:'+c+'"></div></div><span class="v">'+txt+'</span></div>'}
+function init(root){
+  var th=root.getAttribute('data-lang')==='th';function t(e,h){return th?h:e}
+  var C={};[].slice.call(root.querySelectorAll('.gx-calc')).forEach(function(c){C[c.dataset.c]=c});
+  function f(c,k){return c.querySelector('[data-f="'+k+'"]')}
+  function bridge(){var c=C.bridge,nla=num(f(c,'nla')),occ=num(f(c,'occ')),tgt=num(f(c,'tgt')),rent=num(f(c,'rent')),o='';
+    if(nla&&nla>0)o+=row(t('1 occupancy point on this NLA','1 จุดของอัตราการเช่าบน NLA นี้'),fmt(nla/100,2)+t(' m²',' ตร.ม.'));
+    if(nla>0&&occ!==null){var vr=occ/nla*100;o+=row(t('Verified occupancy rate','อัตราการเช่าที่ยืนยันแล้ว'),fmt(vr,2)+'%',tgt===null);
+      if(tgt!==null){var req=Math.max(0,tgt/100-occ/nla)*nla;o+=row(t('Required net letting','พื้นที่ที่ต้องปล่อยเช่าเพิ่มสุทธิ'),fmt(req,2)+t(' m²',' ตร.ม.'),true);
+        if(rent)o+=row(t('Gross rent on that area','ค่าเช่ารวมของพื้นที่นั้น'),'THB '+fmt(req*rent)+t('/month · ','/เดือน · ')+fmt(req*rent*12/1e6,2)+t('m/yr',' ล้าน/ปี'));
+        o+='<div class="gx-note" style="margin:4px 0 0">'+t('Gross new lettings must also cover confirmed expiries, surrenders and terminations.','การปล่อยเช่าใหม่รวมต้องชดเชยสัญญาที่หมดอายุ คืนพื้นที่ และยกเลิกที่ยืนยันแล้วด้วย')+'</div>'}
+      else o+='<div class="gx-wait">'+t('Enter the management-approved target rate.','กรอกอัตราเป้าหมายที่ฝ่ายบริหารอนุมัติ')+'</div>'}
+    else o+='<div class="gx-wait">'+t('Enter occupied NLA from the signed rent roll. No 8X% / 9X% digits are assumed.','กรอก NLA ที่มีผู้เช่าจาก rent roll ที่ลงนาม ไม่มีการสมมติตัวเลข 8X% / 9X%')+'</div>';
+    c.querySelector('.gx-out').innerHTML=o}
+  function group(){var c=C.group,m=num(f(c,'master'))||0,a=f(c,'tv31').checked?943.65:0,b=f(c,'tv407').checked?407.56:0,x=num(f(c,'other'))||0,basis=num(f(c,'basis')),tot=m+a+b+x,o='';
+    o+=row(t('Total group occupied NLA','NLA ที่กลุ่มเช่ารวม'),fmt(tot,2)+t(' m²',' ตร.ม.'),true);
+    if(basis>0)o+=row(t('Share of area basis','สัดส่วนของฐานพื้นที่'),fmt(tot/basis*100,2)+'%');
+    var mx=Math.max(tot,m+943.65+407.56+x);
+    o+='<div class="gx-mini">'+bar(t('Master lease','สัญญาหลัก'),m,mx,'#f2c86a',fmt(m,2))+bar(t('Standalone, counted','สัญญาแยกที่นับ'),a+b+x,mx,'#2dd4bf',fmt(a+b+x,2))+'</div>';
+    if(!a&&!b)o+='<div class="gx-note" style="margin:4px 0 0">'+t('The GMMTV leases stay out until signed demises prove they sit outside the master allocation.','สัญญา GMMTV จะไม่ถูกนับจนกว่าเอกสารพื้นที่เช่าที่ลงนามพิสูจน์ว่าอยู่นอกสัญญากลุ่มหลัก')+'</div>';
+    c.querySelector('.gx-out').innerHTML=o}
+  function ner(){var c=C.ner,R=num(f(c,'r'))||0,T=Math.max(1,num(f(c,'t'))||36),M=Math.min(Math.max(0,num(f(c,'m'))||0),T),A=num(f(c,'a'))||0,Cm=num(f(c,'c'))||0,K=num(f(c,'k'))||0,E=num(f(c,'e'))||0,area=num(f(c,'area'))||0;
+    var reff=R*(T-M)/T-(A+Cm)/T,ctot=reff+(K+E)/T,o='';
+    o+=row('R<sub>eff</sub> '+t('(THB/m²/month)','(บาท/ตร.ม./เดือน)'),fmt(reff,2),true);
+    o+=row(t('Below headline','ต่ำกว่าราคาประกาศ'),R?'−'+fmt((1-reff/R)*100,1)+'%':'—');
+    o+=row('C<sub>total</sub> '+t('(THB/m²/month)','(บาท/ตร.ม./เดือน)'),fmt(ctot,2));
+    if(area){o+=row(t('Gross headline over term','ค่าเช่ารวมตามราคาประกาศตลอดสัญญา'),'THB '+fmt(R*area*T/1e6,2)+'m');
+      o+=row(t('Landlord net receipt over term','รายรับสุทธิของเจ้าของตลอดสัญญา'),'THB '+fmt(reff*area*T/1e6,2)+'m')}
+    c.querySelector('.gx-out').innerHTML=o}
+  function pool(){var c=C.pool,P=num(f(c,'pool')),A=num(f(c,'parea')),o='';
+    if(P&&A>0){var r=P/(A*12);o+=row(t('Implied mean asking rate','ค่าเช่าเสนอเฉลี่ยโดยนัย'),'THB '+fmt(r,2)+t('/m²/month','/ตร.ม./เดือน'),true);
+      var mx=Math.max(r,864.63,869,900)*1.05;
+      o+='<div class="gx-mini">'+bar(t('This pool','มูลค่านี้'),r,mx,'#2dd4bf',fmt(r,2))+bar(t('Planning rate','อัตราวางแผน'),850,mx,'#b48cff','850')+bar(t('GMM group disclosed','อัตรากลุ่ม GMM ที่เปิดเผย'),864.63,mx,'#f2c86a','864.63')+bar(t('KF Grade B ask, Q3 2026','Knight Frank เกรด B Q3 2026'),869,mx,'#6f93ff','869')+'</div>'}
+    else o+='<div class="gx-wait">'+t('Enter a pool and an area.','กรอกมูลค่าและพื้นที่')+'</div>';
+    c.querySelector('.gx-out').innerHTML=o}
+  var map={bridge:bridge,group:group,ner:ner,pool:pool};
+  Object.keys(C).forEach(function(k){C[k].addEventListener('input',map[k]);C[k].addEventListener('change',map[k]);map[k]()});
+}
+function boot(){[].slice.call(document.querySelectorAll('.gx[data-gx="toolkit"]')).forEach(function(r){if(!r.__tk){r.__tk=1;try{init(r)}catch(e){console.error('toolkit',e)}}})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
+
+</body></html>
